@@ -3,84 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Merchandise Store</title>
+    <title>Merchandise Store</title>
     <style>
-        body {
+        /* General Reset */
+        body, html {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #010535; /* Dark blue background */
-            overflow: hidden;
+            background-color: #FFFFFF; /* Snow */
+            overflow-x: hidden;
         }
-    
-        #logo-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: transparent; /* Use transparent or match the body's background */
-            transition: transform 0.5s ease-out;
-            z-index: 10;
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        /* Full-screen image */
+        #top-image {
             width: 100%;
-        }
-    
-        #main-content {
-            display: none;
+            height: 100vh;
+            background-image: url("https://i.pinimg.com/736x/d4/92/ad/d492ad783acc98e34644c8dfce98353e.jpg"); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
             position: relative;
-            margin-top: 0;
-            padding: 20px;
-            background-color: #010535; /* Dark blue background */
+            transition: all 1s ease-in-out;
         }
 
-        .panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
-            padding: 10px;
-            background: #f5e3c3; /* Cream color for panels */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for panels */
-            cursor: pointer;
+        /* Shrinks top image to half */
+        #top-image.half {
+            height: 50vh;
         }
 
-        .panel img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
+        /* Main content container */
+        .main-content {
+            padding: 30px 10%;
+            background-color: #FFFFFF; /* Snow */
         }
 
-        .panel span {
-            margin-top: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333; /* Text color for panel titles */
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            color: #000000; /* Coal */
+            margin-bottom: 20px;
         }
 
+        /* Grid Panels */
         .panels-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
-    </style>    
+
+        .panel {
+            background-color: #FFFFFF; /* Snow */
+            border: 2px solid #808080; /* Gravel */
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            padding: 15px;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #880000; /* Crimson */
+        }
+
+        .panel span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000000; /* Coal */
+        }
+
+    </style>
 </head>
 <body>
-    <div id="logo-screen">
-        <img src="https://i.pinimg.com/736x/5e/8d/cd/5e8dcdab309331a464d39a9a38d0ca6a.jpg" alt="logo">
-    </div>
+    <!-- Full-screen Image -->
+    <div id="top-image"></div>
 
-    <div id="main-content">
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="title">Explore Our Merchandise</h1>
         <div class="panels-container">
+            <!-- Replace image URLs below -->
             <div class="panel">
                 <img src="https://i.pinimg.com/736x/5c/c0/5c/5cc05c094d99b0a0195bfd5eacad6db7.jpg" alt="Hoodies">
-                <span>Hoodies/Sweaters</span>
+                <span>Hoodies</span>
             </div>
             <div class="panel">
-                <img src="https://i.pinimg.com/736x/00/a6/db/00a6dbc27bd49e69d1a150aeca40423e.jpg" alt="Shirts">
-                <span>Shirts</span>
+                <a href="shirts.html">
+                    <img src="https://i.pinimg.com/736x/00/a6/db/00a6dbc27bd49e69d1a150aeca40423e.jpg" alt="Shirts">
+                    <span>Shirts</span>
+                </a>
             </div>
             <div class="panel">
                 <img src="https://i.pinimg.com/736x/eb/06/e6/eb06e602e80e83d3f73c362ce7c9b6f0.jpg" alt="Pants">
@@ -90,7 +109,7 @@
                 <img src="https://i.pinimg.com/736x/42/bb/a5/42bba51a8bcc635b9cd5d5a7d1447802.jpg" alt="Shoes">
                 <span>Shoes</span>
             </div>
-            <div class="panel" onclick="location.href='headwear.html'">
+            <div class="panel">
                 <img src="https://i.pinimg.com/736x/63/b3/0f/63b30fd29c97ee90c2b4352877490e6f.jpg" alt="Headwear">
                 <span>Headwear</span>
             </div>
@@ -98,21 +117,12 @@
     </div>
 
     <script>
-        // Display logo for 2 seconds, then slide up to reveal main content
+        // Wait for 1 second and then slide the top image up
         window.onload = function () {
-            const logoScreen = document.getElementById('logo-screen');
-            const mainContent = document.getElementById('main-content');
-
+            const topImage = document.getElementById('top-image');
             setTimeout(() => {
-                // Move logo screen out of view
-                logoScreen.style.transform = 'translateY(-100vh)';
-
-                // Wait for the animation to finish
-                setTimeout(() => {
-                    logoScreen.style.display = 'none'; // Hide logo screen
-                    mainContent.style.display = 'block'; // Show main content
-                }, 500); // Match this duration to the CSS transition duration
-            }, 2000); // Wait for 2 seconds before starting the transition
+                topImage.classList.add('half');
+            }, 1000);
         };
     </script>
 </body>
