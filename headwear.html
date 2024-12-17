@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headwear</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #010535; /* Dark blue background */
+        }
+
+        .panels-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            padding: 10px;
+            background: #f5e3c3; /* Cream color for panels */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for panels */
+        }
+
+        .panel img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .panel span {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333; /* Text color for panel titles */
+        }
+    </style>
+</head>
+<body>
+    <div class="panels-container">
+        <div class="panel">
+            <img src="https://i.pinimg.com/736x/66/d6/c4/66d6c438473b3a20508352882d10d9e6.jpg" alt="Rems Merch">
+            <span>Rems Merch</span>
+        </div>
+        <div class="panel">
+            <img src="https://i.pinimg.com/736x/6d/66/a5/6d66a5d747794f4eea2bb13fdf89f1b2.jpg" alt="Polo Cap">
+            <span>Polo Cap</span>
+        </div>
+        <div class="panel">
+            <img src="https://i.pinimg.com/736x/63/dd/e6/63dde6b32c9f399a0bedac59c20b25eb.jpg" alt="Wool Beanie">
+            <span>Wool Beanie</span>
+        </div>
+        <div class="panel">
+            <img src="https://i.pinimg.com/736x/f9/95/4f/f9954fe008ec9462bd95ecbf1747e598.jpg" alt="Polyester Beanie">
+            <span>Polyester Beanie</span>
+        </div>
+    </div>
+</body>
+</html>
