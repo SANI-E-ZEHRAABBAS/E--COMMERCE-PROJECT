@@ -13,8 +13,8 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #808080; /* Background Color */
+            font-family: "Times New Roman", serif;
+            background-color: #000000; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
@@ -24,16 +24,19 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #d9d9d9; /* Updated Light Grey Panel Color */
+            background-color: #808080; /* Updated Darker Grey Panel Color */
             border: 3px solid #000;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
         }
 
         /* Shirt Image Section */
         .shirt-panel {
-            width: 100%;
-            height: 60vh;
+            width: 50%;
+            height: auto;
             border-radius: 8px;
             overflow: hidden;
             background-color: #f5f5f5;
@@ -46,11 +49,17 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            filter: brightness(1); /* Base Filter for Shirt */
+        }
+
+        /* Content Section */
+        .content {
+            width: 50%;
         }
 
         /* Headings */
         h1, h2, h3 {
-            font-family: "Arial", sans-serif;
+            font-family: "Times New Roman", serif;
             margin: 15px 0 10px;
             color: #000;
         }
@@ -79,10 +88,11 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #a9a9a9; /* Lighter Grey */
         }
 
         .options div:hover, .options div.selected {
-            background-color: #800000; /* Maroon for Selected Option */
+            background-color: #4b0b14; /* Maroon for Selected Option */
             color: #FFF;
         }
 
@@ -90,6 +100,7 @@
         .small-heading {
             font-size: 1rem;
             margin-bottom: 10px;
+            font-weight: normal; /* Less Bold Style */
         }
 
         /* Color Options */
@@ -102,7 +113,7 @@
         .color-box {
             width: 30px;
             height: 30px;
-            border: 2px solid #000;
+            border: 1px solid #000; /* Thin Border for Circles */
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -110,7 +121,7 @@
 
         .color-box:hover, .color-box.selected {
             transform: scale(1.1);
-            border: 3px solid #000;
+            border: 2px solid #000;
         }
 
         /* File Upload */
@@ -130,6 +141,7 @@
             text-align: center;
             color: #666;
             cursor: pointer;
+            background-color: #a9a9a9; /* Lighter Grey */
             transition: background-color 0.3s ease;
         }
 
@@ -161,21 +173,21 @@
         }
 
         .buttons button:first-child { /* Add to Cart Button */
-            background-color: #000000; /* Black */
+            background-color: #000; /* Black */
             color: #FFF;
         }
 
         .buttons button:first-child:hover {
-            background-color: #333333;
+            background-color: #333;
         }
 
         .buttons button:last-child { /* Buy Now Button */
-            background-color: #800000; /* Maroon */
+            background-color: #4b0b14; /* Maroon */
             color: #FFF;
         }
 
         .buttons button:last-child:hover {
-            background-color: #6b0000;
+            background-color: #4b0b14;
         }
 
         /* Size Chart Modal */
@@ -217,63 +229,70 @@
             height: 400px;
             border: none;
         }
+
+        #price {
+            font-weight: bold; /* Bold the Price */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Shirt Display Panel -->
         <div class="shirt-panel">
-            <img src="file-Ris368c6QGZN7aWMUcZmPF" id="shirt-image" alt="Shirt Preview">
+            <img src="https://i.pinimg.com/736x/f8/dd/6b/f8dd6bd93d0fdd92e60d0235f0ba08e1.jpg" id="shirt-image" alt="Shirt Preview">
         </div>
 
-        <!-- Name of Selected Option -->
-        <h1 class="escorter" id="shirt-name">Oversized Shirts</h1>
+        <!-- Content Section -->
+        <div class="content">
+            <!-- Name of Selected Option -->
+            <h1 class="escorter" id="shirt-name">Oversized Shirts</h1>
 
-        <!-- Technique Selection -->
-        <h3 class="small-heading">Technique</h3>
-        <div class="options">
-            <div class="technique-option selected" onclick="selectOption(this, 'Digital Print')">Digital Print</div>
-            <div class="technique-option" onclick="selectOption(this, 'Embroidery')">Embroidery</div>
-        </div>
+            <!-- Technique Selection -->
+            <h3 class="small-heading">Technique</h3>
+            <div class="options">
+                <div class="technique-option selected" onclick="selectOption(this)">Digital Print</div>
+                <div class="technique-option" onclick="selectOption(this)">Embroidery</div>
+            </div>
 
-        <!-- Color Selection -->
-        <h3 class="small-heading">Colours</h3>
-        <div class="color-options" id="color-options">
-            <div class="color-box" style="background-color: #003366;" onclick="changeColor('#003366')"></div>
-            <div class="color-box" style="background-color: #046307;" onclick="changeColor('#046307')"></div>
-            <div class="color-box" style="background-color: #000000;" onclick="changeColor('#000000')"></div>
-            <div class="color-box" style="background-color: #800000;" onclick="changeColor('#800000')"></div>
-            <div class="color-box" style="background-color: #808080;" onclick="changeColor('#808080')"></div>
-            <div class="color-box" style="background-color: #FFFFFF;" onclick="changeColor('#FFFFFF')"></div>
-            <div class="color-box" style="background-color: #B38B6D;" onclick="changeColor('#B38B6D')"></div>
-        </div>
+            <!-- Color Selection -->
+            <h3 class="small-heading">Colours</h3>
+            <div class="color-options" id="color-options">
+                <div class="color-box" style="background-color: #011325;"></div>
+                <div class="color-box" style="background-color: #002001;"></div>
+                <div class="color-box" style="background-color: #000000;"></div>
+                <div class="color-box" style="background-color: #36030a;"></div>
+                <div class="color-box" style="background-color: #5a5959;"></div>
+                <div class="color-box" style="background-color: #FFFFFF;"></div>
+                <div class="color-box" style="background-color: #a78165;"></div>
+            </div>
 
-        <!-- Size Selection -->
-        <h3 class="small-heading">Size <span style="float: right;"><a href="#" onclick="openSizeChart()" style="text-decoration: none; color: #000;">Size Chart</a></span></h3>
-        <div class="options">
-            <div class="size-option selected" onclick="selectOption(this, 'XS')">XS</div>
-            <div class="size-option" onclick="selectOption(this, 'S')">S</div>
-            <div class="size-option" onclick="selectOption(this, 'M')">M</div>
-            <div class="size-option" onclick="selectOption(this, 'L')">L</div>
-            <div class="size-option" onclick="selectOption(this, 'XL')">XL</div>
-        </div>
+            <!-- Size Selection -->
+            <h3 class="small-heading">Size <span style="float: right;"><a href="#" onclick="openSizeChart()" style="text-decoration: none; color: #000;">Size Chart</a></span></h3>
+            <div class="options">
+                <div class="size-option selected" onclick="selectOption(this)">XS</div>
+                <div class="size-option" onclick="selectOption(this)">S</div>
+                <div class="size-option" onclick="selectOption(this)">M</div>
+                <div class="size-option" onclick="selectOption(this)">L</div>
+                <div class="size-option" onclick="selectOption(this)">XL</div>
+            </div>
 
-        <!-- Price Display -->
-        <h3 class="small-heading">Price</h3>
-        <p id="price">$49.99</p>
+            <!-- Price Display -->
+            <h3 class="small-heading">Price</h3>
+            <p id="price">$49.99</p>
 
-        <!-- File Upload -->
-        <h3 class="small-heading">Create Your Own Style</h3>
-        <div class="file-upload">
-            <label for="file-input" id="file-label">Attach your design file here</label>
-            <input type="file" id="file-input" accept=".png, .pdf, .jpeg">
-            <span>Formats allowed: PNG, PDF, JPEG</span>
-        </div>
+            <!-- File Upload -->
+            <h3 class="small-heading">Create Your Own Style</h3>
+            <div class="file-upload">
+                <label for="file-input" id="file-label">Attach your design file here</label>
+                <input type="file" id="file-input" accept=".png, .pdf, .jpeg">
+                <span>Formats allowed: PNG, PDF, JPEG</span>
+            </div>
 
-        <!-- Buttons -->
-        <div class="buttons">
-            <button>Add to Cart</button>
-            <button>Buy Now</button>
+            <!-- Buttons -->
+            <div class="buttons">
+                <button>Add to Cart</button>
+                <button>Buy Now</button>
+            </div>
         </div>
     </div>
 
@@ -286,10 +305,6 @@
     </div>
 
     <script>
-        function changeColor(color) {
-            document.getElementById('shirt-image').style.backgroundColor = color;
-        }
-
         function selectOption(element) {
             const siblings = element.parentElement.children;
             for (let sibling of siblings) {
@@ -308,10 +323,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
