@@ -3,134 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shirts Collection</title>
+    <title>Pants Collection</title>
     <style>
         /* General Reset */
-        * {
+        body, html {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: Arial, sans-serif;
-            background-color: #808080; /* Background color */
-            color: #000;
-            overflow-x: hidden;
+            background-color: #808080; /* Grey */
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+            color: #000000; /* Black */
         }
 
-        /* Fullscreen Top Image Section */
-        .top-section {
+        /* Full-screen top image */
+        #top-image {
             width: 100%;
-            height: 70vh; /* Height for the top section */
-            background-image: url('YOUR-TOP-IMAGE.jpg'); /* Replace with your top image */
+            height: 80vh; /* Half the viewport height */
+            background-image: url("https://i.pinimg.com/736x/a2/5f/04/a25f04a992f274da660aa1d4ece654ec.jpg");
             background-size: cover;
             background-position: center;
             position: relative;
         }
 
-        /* Scroll Indicator */
-        .scroll-down {
+        /* Filter icon */
+        .filter-icon {
             position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #FFF;
-            font-size: 1rem;
-            text-transform: uppercase;
-            animation: bounce 1.5s infinite;
+    top: 20px;
+    right: 20px;
+    color: #4b0b14;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translate(-50%, 0);
-            }
-            50% {
-                transform: translate(-50%, -10px);
-            }
+        /* Dropdown styles */
+        #filterDropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #FFFFFF;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
         }
 
-        /* Shirts Panel Section */
-        .shirts-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two panels side-by-side */
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .shirt-panel {
-            background-color: #FFF;
-            border: 3px solid #000; /* Added borders */
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            height: 60vh; /* Slightly taller to fit the image better */
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .shirt-panel img {
+        #filterDropdown button {
             width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ensures the image fits without cropping */
-            background-color: #f5f5f5; /* Adds a subtle background to fill empty space */
+            padding: 10px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #000000; /* Black */
         }
 
-        .shirt-panel:hover {
+        #filterDropdown button:hover {
+            background-color: #F5F5F5;
+        }
+
+        /* Main content container */
+        .main-content {
+            padding: 30px 10%;
+            background-color: #808080; /* Grey */
+            min-height: 100vh; /* Ensure content takes full screen */
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            color: #000000; /* Black */
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* Grid Panels */
+        .panels-container {
+            display: grid;
+            grid-template-columns: repeat(2, 500px); /* Adjusted column width to 300px */
+            gap: 20px; /* Increased horizontal and vertical space between panels */
+            justify-content: center; /* Center the panels horizontally */
+        }
+
+        .panel {
+            background-color: #808080; /* Grey */
+            border: 2px solid #808080;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 300px; /* Increased width to match the grid */
+            margin: 0 auto; /* Center each panel */
+        }
+
+        .panel:hover {
             transform: translateY(-5px);
         }
 
-        .shirt-panel h3 {
-            position: absolute;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #FFF;
-            padding: 10px;
-            text-transform: uppercase;
-            font-size: 1.2rem;
+        .panel img {
             width: 100%;
-            text-align: center;
+            height: 350px; /* Retained height */
+            object-fit: cover;
+            border-bottom: 2px solid #000000; /* Black */
+        }
+
+        .panel span {
+            display: block;
+            margin-top: 2px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
+        }
+
+        .panel .price {
+            font-size: 1rem;
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .shirts-container {
-                grid-template-columns: 1fr; /* Single column for smaller screens */
-            }
-
-            .shirt-panel {
-                height: 40vh; /* Adjusted for mobile devices */
+            .panels-container {
+                grid-template-columns: 1fr; /* Stack panels on smaller screens */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Top Section -->
-    <div class="top-section">
-        <div class="scroll-down">Scroll Down ↓</div>
+    <!-- Top Image Section -->
+    <div id="top-image">
+        <!-- Filter Icon -->
+        <div class="filter-icon" onclick="toggleDropdown()">☰</div>
+        <!-- Dropdown Menu -->
+        <div id="filterDropdown">
+            <button onclick="filterAlphabetically()">Filter Alphabetically</button>
+            <button onclick="filterPriceLowToHigh()">Filter Price: Low to High</button>
+            <button onclick="filterPriceHighToLow()">Filter Price: High to Low</button>
+        </div>
     </div>
 
-    <!-- Shirts Panel Section -->
-    <div class="shirts-container">
-        <div class="shirt-panel">
-            <img src="https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg" alt="Oversized Shirts">
-            <h3>Oversized Shirts</h3>
-        </div>
-        <div class="shirt-panel">
-            <img src="file-Ris368c6QGZN7aWMUcZmPF" alt="Regular Fit">
-            <h3>Regular Fit</h3>
-        </div>
-        <div class="shirt-panel">
-            <img src="file-Ris368c6QGZN7aWMUcZmPF" alt="Long Sleeve Shirts">
-            <h3>Long Sleeve Shirts</h3>
-        </div>
-        <div class="shirt-panel">
-            <img src="file-Ris368c6QGZN7aWMUcZmPF" alt="Sweatshirts">
-            <h3>Sweatshirts</h3>
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h1 class="title">Explore Our Shirts Collection</h1>
+        <div id="panelsContainer" class="panels-container">
+            <div class="panel" data-name="Sweat Shirt" data-price="30">
+                <img src="https://i.pinimg.com/736x/f0/52/f0/f052f0a6c50cf195bc0365927d457b37.jpg" alt="Cargo Pants">
+                <span>Sweat Shirt</span>
+                <span class="price">$30</span>
+            </div>
+            <div class="panel" data-name="Long Sleeved Shirt" data-price="28">
+                <img src="https://i.pinimg.com/736x/03/f5/43/03f543ed2ee16071f3d42a634aadd0ce.jpg" alt="Sweat Pants">
+                <span>Long Sleeved Shirt</span>
+                <span class="price">$28</span>
+            </div>
+            <div class="panel" data-name="Oversized Shirt" data-price="35">
+                <img src="https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg" alt="Wide Leg Pants">
+                <span>Oversized Shirt</span>
+                <span class="price">$35</span>
+            </div>
+            <div class="panel" data-name="Regular Fit Shirt" data-price="25">
+                <img src="https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg" alt="Straight Fit Pants">
+                <span>Regular Fit Shirt</span>
+                <span class="price">$25</span>
+            </div>
         </div>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdown = document.getElementById("filterDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        // Scroll to the first panel after filtering
+        function scrollToPanels() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            panelsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        // Filter panels alphabetically
+        function filterAlphabetically() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
+
+        // Filter panels by price: Low to High
+        function filterPriceLowToHigh() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
+
+        // Filter panels by price: High to Low
+        function filterPriceHighToLow() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
+    </script>
 </body>
 </html>
