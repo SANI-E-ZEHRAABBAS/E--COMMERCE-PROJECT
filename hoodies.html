@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchandise Store</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF; /* Snow */
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* For smooth scrolling */
+        }
+
+        /* Full-screen image */
+        #top-image {
+            width: 100%;
+            height: 100vh;
+            background-image: url("https://i.pinimg.com/736x/d4/92/ad/d492ad783acc98e34644c8dfce98353e.jpg"); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: all 1s ease-in-out;
+        }
+
+        /* Shrinks top image to half */
+        #top-image.half {
+            height: 50vh;
+        }
+
+        /* Main content container */
+        .main-content {
+            padding: 30px 10%;
+            background-color: #FFFFFF; /* Snow */
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            color: #000000; /* Coal */
+            margin-bottom: 20px;
+        }
+
+        /* Grid Panels */
+        .panels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .panel {
+            background-color: #FFFFFF; /* Snow */
+            border: 2px solid #808080; /* Gravel */
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            padding: 15px;
+            cursor: pointer; /* Indicating clickability */
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #880000; /* Crimson */
+        }
+
+        .panel span {
+            display: block;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000000; /* Coal */
+        }
+
+        /* New page styling (after clicking Shirts) */
+        .page-content {
+            background-color: #808080; /* Gravel */
+            color: #FFFFFF;
+            padding: 20px;
+            display: none; /* Hide by default */
+        }
+
+        .page-content.show {
+            display: block; /* Show content */
+        }
+
+        .grid-page-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            grid-template-rows: auto auto;
+        }
+
+        .grid-panel {
+            background-color: #FFFFFF; /* Snow */
+            border: 2px solid #808080; /* Gravel */
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000; /* Coal */
+        }
+
+        .grid-panel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #880000; /* Crimson */
+        }
+
+        /* Responsive Design for small screens */
+        @media (max-width: 768px) {
+            .panels-container {
+                padding: 10px;
+            }
+
+            .panel, .grid-panel {
+                width: 100%;
+            }
+
+            .grid-page-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Full-screen Image -->
+    <div id="top-image"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="title">Explore Our Merchandise</h1>
+        <div class="panels-container">
+            <!-- Merchandise panels with links -->
+            <div class="panel" onclick="openShirtsPage()">
+                <img src="https://i.pinimg.com/736x/00/a6/db/00a6dbc27bd49e69d1a150aeca40423e.jpg" alt="Shirts">
+                <span>Shirts</span>
+            </div>
+            <!-- More panels can go here -->
+        </div>
+    </div>
+
+    <!-- New Page content (for Shirts section) -->
+    <div id="shirts-page" class="page-content">
+        <h1 class="title">Shirts Collection</h1>
+        <div class="grid-page-container">
+            <div class="grid-panel">
+                <img src="your-image-link-1.jpg" alt="Oversized Shirts">
+                <span>Oversized Shirts</span>
+            </div>
+            <div class="grid-panel">
+                <img src="your-image-link-2.jpg" alt="Regular Fit">
+                <span>Regular Fit</span>
+            </div>
+            <div class="grid-panel">
+                <img src="your-image-link-3.jpg" alt="Long Sleeve Shirts">
+                <span>Long Sleeve Shirts</span>
+            </div>
+            <div class="grid-panel">
+                <img src="your-image-link-4.jpg" alt="Sweatshirts">
+                <span>Sweatshirts</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for 1 second and then slide the top image up
+        window.onload = function () {
+            const topImage = document.getElementById('top-image');
+            setTimeout(() => {
+                topImage.classList.add('half');
+            }, 1000);
+        };
+
+        // Function to display the shirts page
+        function openShirtsPage() {
+            const page = document.getElementById('shirts-page');
+            page.classList.add('show');
+            window.scrollTo(0, 0); // Scroll to the top of the new page
+        }
+
+        // Scroll down when the user presses the down key
+        window.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowDown') {
+                window.scrollBy(0, window.innerHeight);
+            }
+        });
+    </script>
+</body>
+</html>
