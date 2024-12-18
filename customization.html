@@ -113,7 +113,7 @@
         .color-box {
             width: 30px;
             height: 30px;
-            border: 1px solid #000; /* Thinner Border */
+            border: 1px solid #000; /* Thin Border for Circles */
             border-radius: 50%;
             cursor: pointer;
             transition: transform 0.2s ease;
@@ -257,13 +257,13 @@
             <!-- Color Selection -->
             <h3 class="small-heading">Colours</h3>
             <div class="color-options" id="color-options">
-                <div class="color-box" style="background-color: #010f1d;" onclick="changeColor('#003366')"></div>
-                <div class="color-box" style="background-color: #031b03;" onclick="changeColor('#046307')"></div>
-                <div class="color-box" style="background-color: #000000;" onclick="changeColor('#000000')"></div>
-                <div class="color-box" style="background-color: #3b0b11;" onclick="changeColor('#800000')"></div>
-                <div class="color-box" style="background-color: #474343;" onclick="changeColor('#808080')"></div>
-                <div class="color-box" style="background-color: #FFFFFF;" onclick="changeColor('#FFFFFF')"></div>
-                <div class="color-box" style="background-color: #a38064;" onclick="changeColor('#B38B6D')"></div>
+                <div class="color-box" style="background-color: #011325;"></div>
+                <div class="color-box" style="background-color: #002001;"></div>
+                <div class="color-box" style="background-color: #000000;"></div>
+                <div class="color-box" style="background-color: #36030a;"></div>
+                <div class="color-box" style="background-color: #5a5959;"></div>
+                <div class="color-box" style="background-color: #FFFFFF;"></div>
+                <div class="color-box" style="background-color: #a78165;"></div>
             </div>
 
             <!-- Size Selection -->
@@ -305,18 +305,6 @@
     </div>
 
     <script>
-        function changeColor(color) {
-            const colorBoxes = document.querySelectorAll('.color-box');
-            colorBoxes.forEach(box => box.classList.remove('selected'));
-            const selectedBox = Array.from(colorBoxes).find(box => box.style.backgroundColor === color);
-            if (selectedBox) {
-                selectedBox.classList.add('selected');
-            }
-            const shirtImage = document.getElementById('shirt-image');
-            shirtImage.style.filter = `opacity(0.8) drop-shadow(0 0 0 ${color})`;
-            shirtImage.style.backgroundColor = color;
-        }
-
         function selectOption(element) {
             const siblings = element.parentElement.children;
             for (let sibling of siblings) {
@@ -335,5 +323,3 @@
     </script>
 </body>
 </html>
-
-

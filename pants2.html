@@ -13,6 +13,7 @@
             font-family: Arial, sans-serif;
             background-color: #808080; /* Grey */
             scroll-behavior: smooth; /* Enable smooth scrolling */
+            color: #000000; /* Black */
         }
 
         /* Full-screen top image */
@@ -28,13 +29,12 @@
         /* Filter icon */
         .filter-icon {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #FFFFFF;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
+    top: 20px;
+    right: 20px;
+    color: #4b0b14;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
         }
 
         /* Dropdown styles */
@@ -58,6 +58,7 @@
             text-align: left;
             cursor: pointer;
             font-size: 1rem;
+            color: #000000; /* Black */
         }
 
         #filterDropdown button:hover {
@@ -74,26 +75,27 @@
         .title {
             text-align: center;
             font-size: 2rem;
-            color: #FFFFFF; /* White */
+            color: #000000; /* Black */
             margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
         }
 
         /* Grid Panels */
         .panels-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 500px); /* Adjusted column width to 300px */
+            gap: 20px; /* Increased horizontal and vertical space between panels */
+            justify-content: center; /* Center the panels horizontally */
         }
 
         .panel {
-            background-color: #FFFFFF; /* White */
-            border: 2px solid #880000; /* Crimson */
-            border-radius: 8px;
+            background-color: #808080; /* Grey */
+            border: 2px solid #808080;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
-            padding: 15px;
-            aspect-ratio: 5 / 7; /* 5x7 Panel Size */
+            width: 300px; /* Increased width to match the grid */
+            margin: 0 auto; /* Center each panel */
         }
 
         .panel:hover {
@@ -102,28 +104,30 @@
 
         .panel img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensure the image fills the panel */
-            border-bottom: 2px solid #880000; /* Crimson */
+            height: 350px; /* Retained height */
+            object-fit: cover;
+            border-bottom: 2px solid #000000; /* Black */
         }
 
         .panel span {
             display: block;
-            margin-top: 10px;
-            font-size: 1.2rem;
+            margin-top: 2px;
+            font-size: 1rem;
             font-weight: bold;
-            color: #000000; /* Coal */
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
         }
 
         .panel .price {
             font-size: 1rem;
-            color: #555; /* Grayish */
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .panels-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stack panels on smaller screens */
             }
         }
     </style>
