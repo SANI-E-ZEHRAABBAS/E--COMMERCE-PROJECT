@@ -11,56 +11,91 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #FFFFFF; /* Snow */
-            overflow-x: hidden;
-            scroll-behavior: smooth; /* For smooth scrolling */
+            background-color: #808080; /* Grey */
+            scroll-behavior: smooth; /* Enable smooth scrolling */
+            color: #000000; /* Black */
         }
 
-        /* Full-screen image */
+        /* Full-screen top image */
         #top-image {
             width: 100%;
-            height: 100vh;
-            background-image: url("https://i.pinimg.com/736x/d4/92/ad/d492ad783acc98e34644c8dfce98353e.jpg"); /* Replace with your image */
+            height: 80vh; /* Half the viewport height */
+            background-image: url("https://i.pinimg.com/736x/97/7d/af/977dafb762fcea22a62f2fefed1c4bd6.jpg");
             background-size: cover;
             background-position: center;
             position: relative;
-            transition: all 1s ease-in-out;
         }
 
-        /* Shrinks top image to half */
-        #top-image.half {
-            height: 50vh;
+        /* Filter icon */
+        .filter-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #4b0b14;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Dropdown styles */
+        #filterDropdown {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #FFFFFF;
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #filterDropdown button {
+            width: 100%;
+            padding: 10px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #000000; /* Black */
+        }
+
+        #filterDropdown button:hover {
+            background-color: #F5F5F5;
         }
 
         /* Main content container */
         .main-content {
             padding: 30px 10%;
-            background-color: #FFFFFF; /* Snow */
+            background-color: #808080; /* Grey */
+            min-height: 100vh; /* Ensure content takes full screen */
         }
 
         .title {
             text-align: center;
             font-size: 2rem;
-            color: #000000; /* Coal */
+            color: #000000; /* Black */
             margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
         }
 
         /* Grid Panels */
         .panels-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 500px); /* Adjusted column width to 300px */
+            gap: 20px; /* Increased horizontal and vertical space between panels */
+            justify-content: center; /* Center the panels horizontally */
         }
 
         .panel {
-            background-color: #FFFFFF; /* Snow */
-            border: 2px solid #808080; /* Gravel */
-            border-radius: 8px;
+            background-color: #808080; /* Grey */
+            border: 2px solid #808080;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
-            padding: 15px;
-            cursor: pointer; /* Indicating clickability */
+            width: 300px; /* Increased width to match the grid */
+            margin: 0 auto; /* Center each panel */
         }
 
         .panel:hover {
@@ -69,139 +104,114 @@
 
         .panel img {
             width: 100%;
-            height: 200px;
+            height: 350px; /* Retained height */
             object-fit: cover;
-            border-bottom: 2px solid #880000; /* Crimson */
+            border-bottom: 2px solid #000000; /* Black */
         }
 
         .panel span {
             display: block;
-            margin-top: 10px;
-            font-size: 1.2rem;
+            margin-top: 2px;
+            font-size: 1rem;
             font-weight: bold;
-            color: #000000; /* Coal */
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
         }
 
-        /* New page styling (after clicking Shirts) */
-        .page-content {
-            background-color: #808080; /* Gravel */
-            color: #FFFFFF;
-            padding: 20px;
-            display: none; /* Hide by default */
+        .panel .price {
+            font-size: 1rem;
+            color: #000000; /* Black */
+            font-family: 'Times New Roman', serif;
         }
 
-        .page-content.show {
-            display: block; /* Show content */
-        }
-
-        .grid-page-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            grid-template-rows: auto auto;
-        }
-
-        .grid-panel {
-            background-color: #FFFFFF; /* Snow */
-            border: 2px solid #808080; /* Gravel */
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            cursor: pointer;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000000; /* Coal */
-        }
-
-        .grid-panel img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 2px solid #880000; /* Crimson */
-        }
-
-        /* Responsive Design for small screens */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .panels-container {
-                padding: 10px;
-            }
-
-            .panel, .grid-panel {
-                width: 100%;
-            }
-
-            .grid-page-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stack panels on smaller screens */
             }
         }
     </style>
 </head>
 <body>
+    <!-- Top Image Section -->
+    <div id="top-image">
+        <!-- Filter Icon -->
+        <div class="filter-icon" onclick="toggleDropdown()">☰</div>
+        <!-- Dropdown Menu -->
+        <div id="filterDropdown">
+            <button onclick="filterAlphabetically()">Filter Alphabetically</button>
+            <button onclick="filterPriceLowToHigh()">Filter Price: Low to High</button>
+            <button onclick="filterPriceHighToLow()">Filter Price: High to Low</button>
+        </div>
+    </div>
 
-    <!-- Full-screen Image -->
-    <div id="top-image"></div>
-
-    <!-- Main Content -->
+    <!-- Main Content Section -->
     <div class="main-content">
-        <h1 class="title">Explore Our Merchandise</h1>
-        <div class="panels-container">
-            <!-- Merchandise panels with links -->
-            <div class="panel" onclick="openShirtsPage()">
-                <img src="https://i.pinimg.com/736x/00/a6/db/00a6dbc27bd49e69d1a150aeca40423e.jpg" alt="Shirts">
-                <span>Shirts</span>
+        <h1 class="title">Explore Our Hoodies Collection</h1>
+        <div id="panelsContainer" class="panels-container">
+            <div class="panel" data-name="Red Hoodie" data-price="50">
+                <img src="https://i.pinimg.com/736x/2c/40/d8/2c40d8d41985a136be87f2ed312ff58d.jpg" alt="Red Hoodie">
+                <span> Oversized Hoodie</span>
+                <span class="price">$50</span>
             </div>
-            <!-- More panels can go here -->
-        </div>
-    </div>
-
-    <!-- New Page content (for Shirts section) -->
-    <div id="shirts-page" class="page-content">
-        <h1 class="title">Shirts Collection</h1>
-        <div class="grid-page-container">
-            <div class="grid-panel">
-                <img src="your-image-link-1.jpg" alt="Oversized Shirts">
-                <span>Oversized Shirts</span>
+            <div class="panel" data-name="Black Hoodie" data-price="45">
+                <img src="https://i.pinimg.com/736x/a9/06/1d/a9061db8613f7f11f49a28b877afd254.jpg" alt="Black Hoodie">
+                <span>Classic Hoodie</span>
+                <span class="price">$45</span>
             </div>
-            <div class="grid-panel">
-                <img src="your-image-link-2.jpg" alt="Regular Fit">
-                <span>Regular Fit</span>
+            <div class="panel" data-name="Blue Hoodie" data-price="55">
+                <img src="https://i.pinimg.com/736x/6e/f5/5e/6ef55ea7ad27d0108f1cc9b44161ef16.jpg" alt="Blue Hoodie">
+                <span>Cropped Hoodie</span>
+                <span class="price">$55</span>
             </div>
-            <div class="grid-panel">
-                <img src="your-image-link-3.jpg" alt="Long Sleeve Shirts">
-                <span>Long Sleeve Shirts</span>
-            </div>
-            <div class="grid-panel">
-                <img src="your-image-link-4.jpg" alt="Sweatshirts">
-                <span>Sweatshirts</span>
+            <div class="panel" data-name="Grey Hoodie" data-price="40">
+                <img src="https://i.pinimg.com/736x/f9/7f/5b/f97f5bbc9994e93e76c74850c9f5ad46.jpg" alt="Grey Hoodie">
+                <span>Zipper Hoodie</span>
+                <span class="price">$40</span>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript -->
     <script>
-        // Wait for 1 second and then slide the top image up
-        window.onload = function () {
-            const topImage = document.getElementById('top-image');
-            setTimeout(() => {
-                topImage.classList.add('half');
-            }, 1000);
-        };
-
-        // Function to display the shirts page
-        function openShirtsPage() {
-            const page = document.getElementById('shirts-page');
-            page.classList.add('show');
-            window.scrollTo(0, 0); // Scroll to the top of the new page
+        // Toggle dropdown visibility
+        function toggleDropdown() {
+            const dropdown = document.getElementById("filterDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        // Scroll down when the user presses the down key
-        window.addEventListener('keydown', function (e) {
-            if (e.key === 'ArrowDown') {
-                window.scrollBy(0, window.innerHeight);
-            }
-        });
+        // Scroll to the first panel after filtering
+        function scrollToPanels() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            panelsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        // Filter panels alphabetically
+        function filterAlphabetically() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
+
+        // Filter panels by price: Low to High
+        function filterPriceLowToHigh() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => parseFloat(a.dataset.price) - parseFloat(b.dataset.price));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
+
+        // Filter panels by price: High to Low
+        function filterPriceHighToLow() {
+            const panelsContainer = document.getElementById("panelsContainer");
+            const panels = Array.from(panelsContainer.children);
+            panels.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
+            panels.forEach(panel => panelsContainer.appendChild(panel));
+            scrollToPanels();
+        }
     </script>
 </body>
 </html>
