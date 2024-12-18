@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoodie Customization</title>
+    <style>
+        /* General reset and styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .hoodie-panel {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+
+        .hoodie {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hoodie img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .hoodie:hover {
+            transform: scale(1.05);
+        }
+
+        /* Customization Panel */
+        .customization-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .customization-panel.show {
+            display: flex;
+        }
+
+        .customization-panel .panel-content {
+            background-color: #fff;
+            padding: 20px;
+            width: 50%;
+            border-radius: 8px;
+            color: black;
+        }
+
+        .customization-panel .panel-content h2 {
+            text-align: center;
+        }
+
+        .customization-panel .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+        }
+
+        .customization-panel select, .customization-panel input {
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+        }
+
+        .customization-panel button {
+            padding: 10px;
+            background-color: #880000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .customization-panel button:hover {
+            background-color: #555;
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #880000;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .cart-details {
+            display: none;
+            position: fixed;
+            top: 50px;
+            right: 0;
+            width: 40%;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            height: 90vh;
+        }
+
+        .cart-details.show {
+            display: block;
+        }
+
+        .cart-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .checkout-button {
+            background-color: #880000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .clear-cart {
+            background-color: #808080; /* Grey for clear cart */
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .total-bill {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon" onclick="toggleCartDetails()">🛒</div>
+
+    <!-- Cart Details Panel -->
+    <div class="cart-details">
+        <h3>Your Cart</h3>
+        <div class="cart-items"></div>
+        <div class="checkout-button" onclick="showCheckoutForm()">Checkout</div>
+        <div class="clear-cart" onclick="clearCart()">Clear Cart</div>
+    </div>
+
+    <!-- Hoodie Panel -->
+    <div class="hoodie-panel">
+        <div class="hoodie" onclick="showCustomization(1)">
+            <img src="https://via.placeholder.com/200" alt="Oversized Hoodie">
+            <h4>Oversized Hoodie</h4>
+        </div>
+        <div class="hoodie" onclick="showCustomization(2)">
+            <img src="https://via.placeholder.com/200" alt="Zipper Hoodie">
+            <h4>Zipper Hoodie</h4>
+        </div>
+        <div class="hoodie" onclick="showCustomization(3)">
+            <img src="https://via.placeholder.com/200" alt="Classic Hoodie">
+            <h4>Classic Hoodie</h4>
+        </div>
+        <div class="hoodie" onclick="showCustomization(4)">
+            <img src="https://via.placeholder.com/200" alt="Cropped Hoodie">
+            <h4>Cropped Hoodie</h4>
+        </div>
+    </div>
+
+    <!-- Customization Panel -->
+    <div class="customization-panel" id="customization-panel">
+        <div class="panel-content">
+            <h2>Customize Your Hoodie</h2>
+            <span class="close-btn" onclick="closeCustomization()">×</span>
+            <div id="hoodie-image"></div>
+            <label for="color">Color:</label>
+            <select id="color">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+            <label for="size">Size:</label>
+            <select id="size">
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <button onclick="addToCart()">Add to Cart</button>
+            <button onclick="buyNow()">Buy Now</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let selectedHoodie = null;
+
+        // Show customization panel with selected hoodie
+        function showCustomization(hoodieId) {
+            selectedHoodie = hoodieId;
+            const hoodieImage = document.getElementById('hoodie-image');
+            hoodieImage.innerHTML = `<img src="https://via.placeholder.com/200" alt="Hoodie ${hoodieId}">`; // Dummy image for now
+
+            // Show the customization panel
+            document.getElementById('customization-panel').classList.add('show');
+        }
+
+        // Close the customization panel
+        function closeCustomization() {
+            document.getElementById('customization-panel').classList.remove('show');
+        }
+
+        // Add item to cart
+        function addToCart() {
+            const color = document.getElementById('color').value;
+            const size = document.getElementById('size').value;
+            const hoodieName = `Hoodie ${selectedHoodie}`;
+            const hoodiePrice = 50; // Dummy price
+            const hoodieImage = `https://via.placeholder.com/200`;
+
+            const cartItem = {
+                id: selectedHoodie,
+                name: hoodieName,
+                price: hoodiePrice,
+                color: color,
+                size: size,
+                image: hoodieImage
+            };
+
+            cart.push(cartItem);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(`${hoodieName} added to cart!`);
+            closeCustomization();
+            updateCart();
+        }
+
+        // Buy now (directly proceed to checkout)
+        function buyNow() {
+            addToCart();
+            // Redirect to checkout (this can be a new page or form)
+            alert('Proceeding to checkout!');
+        }
+
+        // Update cart display
+        function updateCart() {
+            const cartContainer = document.querySelector('.cart-items');
+            cartContainer.innerHTML = '';
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <span>${item.name} - $${item.price} x ${item.color} ${item.size}</span>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+        }
+
+        // Toggle cart details visibility
+        function toggleCartDetails() {
+            document.querySelector('.cart-details').classList.toggle('show');
+        }
+
+        // Checkout functionality (dummy for now)
+        function showCheckoutForm() {
+            alert('Checking out...');
+        }
+
+        // Clear cart
+        function clearCart() {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        // Initialize cart display
+        updateCart();
+    </script>
+</body>
+</html>

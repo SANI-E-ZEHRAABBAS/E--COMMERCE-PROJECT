@@ -16,6 +16,17 @@
             color: #000000; /* Black */
         }
 
+        .rems-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Raleway';
+            font-size: 36px;
+            color: #360303; /* Fill color for the text */
+            font-weight: bold;
+            z-index: 1000;
+        }
+
         /* Full-screen top image */
         #top-image {
             width: 100%;
@@ -149,28 +160,38 @@
     <div class="main-content">
         <h1 class="title">Explore Our Hoodies Collection</h1>
         <div id="panelsContainer" class="panels-container">
-            <div class="panel" data-name="Red Hoodie" data-price="50">
+            <div class="panel" data-name="Oversized Hoodie" data-price="50">
+                <a href= "oversized hoodie.html">
                 <img src="https://i.pinimg.com/736x/2c/40/d8/2c40d8d41985a136be87f2ed312ff58d.jpg" alt="Red Hoodie">
                 <span> Oversized Hoodie</span>
-                <span class="price">$50</span>
+                <span class="price">$29.99</span>
+            </a>
             </div>
-            <div class="panel" data-name="Black Hoodie" data-price="45">
-                <img src="https://i.pinimg.com/736x/a9/06/1d/a9061db8613f7f11f49a28b877afd254.jpg" alt="Black Hoodie">
+            <div class="panel" data-name="Classic Hoodie" data-price="45">
+                <a href= "classic hoodie.html">
+                     <img src="https://i.pinimg.com/736x/a9/06/1d/a9061db8613f7f11f49a28b877afd254.jpg" alt="Black Hoodie">
                 <span>Classic Hoodie</span>
-                <span class="price">$45</span>
+                <span class="price">$20.99</span>
+                </a>
             </div>
-            <div class="panel" data-name="Blue Hoodie" data-price="55">
+            <div class="panel" data-name="Cropped Hoodie" data-price="55">
+                <a href= "cropped hoodies.html">
+
                 <img src="https://i.pinimg.com/736x/6e/f5/5e/6ef55ea7ad27d0108f1cc9b44161ef16.jpg" alt="Blue Hoodie">
                 <span>Cropped Hoodie</span>
-                <span class="price">$55</span>
+                <span class="price">$25.99</span>
+            </a>
             </div>
-            <div class="panel" data-name="Grey Hoodie" data-price="40">
-                <img src="https://i.pinimg.com/736x/f9/7f/5b/f97f5bbc9994e93e76c74850c9f5ad46.jpg" alt="Grey Hoodie">
+            <div class="panel" data-name="Zipper Hoodie" data-price="40">
+                <a href= "zipper hoodies.html">
+                    <img src="https://i.pinimg.com/736x/f9/7f/5b/f97f5bbc9994e93e76c74850c9f5ad46.jpg" alt="Grey Hoodie">
                 <span>Zipper Hoodie</span>
-                <span class="price">$40</span>
+                <span class="price">$34.99</span>
+                </a>
             </div>
         </div>
     </div>
+    <div class="rems-logo">REMS</div>
 
     <!-- JavaScript -->
     <script>
@@ -212,6 +233,7 @@
             panels.forEach(panel => panelsContainer.appendChild(panel));
             scrollToPanels();
         }
+        
     </script>
 </body>
 </html>
