@@ -320,6 +320,11 @@
         function closeSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'none';
         }
+         // Extract query parameter from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedItem = urlParams.get("item");
+
+
     </script>
 </body>
 </html>
