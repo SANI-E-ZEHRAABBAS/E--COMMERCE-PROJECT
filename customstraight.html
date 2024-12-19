@@ -26,7 +26,7 @@
 
         body {
             font-family: "Times New Roman", serif;
-            background-color: #000000; /* Background Color */
+            background-color: #808080; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
@@ -36,7 +36,7 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #808080; /* Updated Darker Grey Panel Color */
+            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
             border: 3px solid #000;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -201,6 +201,7 @@
         .buttons button:last-child:hover {
             background-color: #4b0b14;
         }
+        
 
         /* Size Chart Modal */
         .size-chart-modal {
@@ -245,6 +246,48 @@
         #price {
             font-weight: bold; /* Bold the Price */
         }
+        #cart-panel 
+        { position: fixed; 
+            top: 0; right: -350px;
+             width: 300px; 
+             height: 100%; 
+             background-color: #fff; 
+             box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2); padding: 20px;
+              transition: right 0.3s ease-in-out; 
+              overflow-y: auto; }
+
+
+        #cart-panel.open 
+        { right: 0; }
+
+        #cart-panel .close-btn
+         { position: absolute; top:
+             10px; right: 10px; 
+             font-size: 1.5rem;
+              cursor: pointer; }
+
+        #cart-panel button 
+        { margin-top: 10px; 
+            padding: 10px;
+             border: none;
+              border-radius: 6px;
+               cursor: pointer; }
+
+        #checkout-form
+         { display: none;
+             margin-top: 20px; }
+
+        #checkout-form input, #checkout-form select
+         { width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px;
+             border: 1px solid #000; 
+             border-radius: 6px; }
+
+
+        #checkout-form button 
+        { background-color: #4b0b14; 
+            color: #fff; }
     </style>
 </head>
 <body>
@@ -253,13 +296,13 @@
 
     <div class="container">
         <!-- Shirt Display Panel -->
-        <div class="shirt-panel">
-            <img src="https://i.pinimg.com/736x/ed/a1/1f/eda11f6652ddd1bc97a27e7d7b261503.jpg" id="shirt-image" alt="Product Preview">
+        <div class="Pants-Panel">
+            <img src="https://i.pinimg.com/736x/d0/93/1a/d0931a5674e0e28c67356fe34c2fc8ed.jpg">
         </div>
 
         <!-- Content Section -->
         <div class="content">
-            <h1 class="escorter" id="shirt-name">Sweatshirt</h1>
+            <h1 class="escorter" id="shirt-name">Straight Fit Pant</h1>
 
             <!-- Technique Selection -->
             <h3 class="small-heading">Technique</h3>
@@ -292,7 +335,7 @@
 
             <!-- Price Display -->
             <h3 class="small-heading">Price</h3>
-            <p id="price">$24.99</p>
+            <p id="price">$25</p>
 
             <!-- File Upload -->
             <h3 class="small-heading">Create Your Own Style</h3>
@@ -307,8 +350,13 @@
                 <button>Add to Cart</button>
                 <button>Buy Now</button>
             </div>
+            <!-- Cart Panel -->
+    <div id="cart-panel">
+        <span class="close-btn" onclick="closeCart()">&times;</span>
+    
         </div>
     </div>
+
 
     <!-- Size Chart Modal -->
     <div id="sizeChartModal" class="size-chart-modal">
@@ -341,6 +389,7 @@
         function closeSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'none';
         }
+        
     </script>
 
 </body>

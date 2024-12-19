@@ -11,9 +11,21 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #808080; /* Grey */
+            background-color: #adaaaa; /* Grey */
             scroll-behavior: smooth; /* Enable smooth scrolling */
-            color: #000000; /* Black */
+            color: #4b0b14; /* Black */
+        }
+        
+        /* REMS Logo (Fixed) */
+        .rems-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Old English Text MT';
+            font-size: 36px;
+            color: #4b0b14; /* Fill color for the text */
+            font-weight: bold;
+            z-index: 1000;
         }
 
         /* Full-screen top image */
@@ -30,7 +42,7 @@
         .filter-icon {
             position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px;
     color: #4b0b14;
     font-size: 2rem;
     cursor: pointer;
@@ -42,7 +54,7 @@
             display: none;
             position: absolute;
             top: 60px;
-            right: 20px;
+            left: 20px;
             background-color: #FFFFFF;
             border: 1px solid #CCC;
             border-radius: 5px;
@@ -58,7 +70,7 @@
             text-align: left;
             cursor: pointer;
             font-size: 1rem;
-            color: #000000; /* Black */
+            color: #4b0b14; /* Black */
         }
 
         #filterDropdown button:hover {
@@ -112,14 +124,14 @@
         .panel span {
             display: block;
             margin-top: 2px;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: #000000; /* Black */
             font-family: 'Times New Roman', serif;
         }
 
         .panel .price {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #000000; /* Black */
             font-family: 'Times New Roman', serif;
         }
@@ -133,6 +145,9 @@
     </style>
 </head>
 <body>
+     <!-- REMS Logo -->
+     <div class="rems-logo">REMS</div>
+
     <!-- Top Image Section -->
     <div id="top-image">
         <!-- Filter Icon -->
@@ -150,23 +165,23 @@
         <h1 class="title">Explore Our Pants Collection</h1>
         <div id="panelsContainer" class="panels-container">
             <div class="panel" data-name="Cargo Pants" data-price="30">
-                <img src="https://i.pinimg.com/736x/01/21/f1/0121f16bcf2a0a1767f6dbb4ce7b9f03.jpg" alt="Cargo Pants">
-                <span>Cargo Pants</span>
+                <a href="customcargo.html"><img src="https://i.pinimg.com/736x/01/21/f1/0121f16bcf2a0a1767f6dbb4ce7b9f03.jpg" alt="Cargo Pants">
+                <span>Cargo Pants</span></a>
                 <span class="price">$30</span>
             </div>
             <div class="panel" data-name="Sweat Pants" data-price="28">
-                <img src="https://i.pinimg.com/736x/5c/55/6e/5c556ed7b6a11237f91a7fa436c4b1af.jpg" alt="Sweat Pants">
-                <span>Sweat Pants</span>
+                <a href="customsweatpants.html"><img src="https://i.pinimg.com/736x/5c/55/6e/5c556ed7b6a11237f91a7fa436c4b1af.jpg" alt="Sweat Pants">
+                <span>Sweat Pants</span></a>
                 <span class="price">$28</span>
             </div>
             <div class="panel" data-name="Wide Leg Pants" data-price="35">
-                <img src="https://i.pinimg.com/736x/06/3b/84/063b84eea4f9665efd5d25251140e5a4.jpg" alt="Wide Leg Pants">
-                <span>Wide Leg Pants</span>
+                <a href="customwideleg.html"><img src="https://i.pinimg.com/736x/06/3b/84/063b84eea4f9665efd5d25251140e5a4.jpg" alt="Wide Leg Pants">
+                <span>Wide Leg Pants</span></a>
                 <span class="price">$35</span>
             </div>
             <div class="panel" data-name="Straight Fit Pants" data-price="25">
-                <img src="https://i.pinimg.com/736x/d0/93/1a/d0931a5674e0e28c67356fe34c2fc8ed.jpg" alt="Straight Fit Pants">
-                <span>Straight Fit Pants</span>
+                <a href="customstraight.html"><img src="https://i.pinimg.com/736x/d0/93/1a/d0931a5674e0e28c67356fe34c2fc8ed.jpg" alt="Straight Fit Pants">
+                <span>Straight Fit Pants</span></a>
                 <span class="price">$25</span>
             </div>
         </div>
@@ -214,4 +229,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
