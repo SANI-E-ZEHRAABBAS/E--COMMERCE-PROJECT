@@ -301,99 +301,6 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  <script>
-    const cart = [];
-    const cartPanel = document.getElementById('cart-panel');
-    const closeBtn = document.getElementById('close-cart');
-    const cartItemsContainer = document.getElementById('cart-items');
-    const cartTotalEl = document.getElementById('cart-total');
-
-    // Open Cart
-    function openCart() {
-      cartPanel.classList.add('open');
-    }
-
-    // Close Cart
-    function closeCart() {
-      cartPanel.classList.remove('open');
-    }
-
-    closeBtn.addEventListener('click', closeCart);
-
-    // Add to Cart Event Listener
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', function() {
-        const id = this.dataset.id;
-        const name = this.dataset.name;
-        const price = parseFloat(this.dataset.price);
-        const img = this.dataset.img;
-
-        const existingItem = cart.find(item => item.id === id);
-
-        if (existingItem) {
-          existingItem.quantity += 1; // Increment quantity
-        } else {
-          cart.push({
-            id,
-            name,
-            price,
-            img,
-            quantity: 1
-          });
-        }
-
-        renderCart();
-        openCart();
-      });
-    });
-
-    // Render Cart
-    function renderCart() {
-      cartItemsContainer.innerHTML = '';
-      let total = 0;
-
-      cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-          <img src="${item.img}" alt="${item.name}">
-          <div class="item-details">
-            <p>${item.name}</p>
-            <p>$${item.price} x ${item.quantity}</p>
-          </div>
-          <div class="item-actions">
-            <button onclick="changeQuantity(${index}, -1)">-</button>
-            <span>${item.quantity}</span>
-            <button onclick="changeQuantity(${index}, 1)">+</button>
-            <button class="delete-btn" onclick="deleteItem(${index})">✖</button>
-          </div>
-        `;
-        cartItemsContainer.appendChild(cartItem);
-      });
-
-      cartTotalEl.textContent = total.toFixed(2);
-    }
-
-    // Change Quantity
-    function changeQuantity(index, amount) {
-      if (cart[index].quantity + amount > 0) {
-        cart[index].quantity += amount;
-      } else {
-        cart.splice(index, 1); // Remove item if quantity is 0
-      }
-      renderCart();
-    }
-
-    // Delete Item
-    function deleteItem(index) {
-      cart.splice(index, 1);
-      renderCart();
-    }
-  </script>
-=======
     <!-- Cart Panel -->
     <div id="cart-panel">
         <h3>Your Cart</h3>
@@ -523,6 +430,5 @@
 
         updateCartPanel();
     </script>
->>>>>>> ca927fce0bdf5503c9587f63a176014b5cbb3e17
 </body>
 </html>
