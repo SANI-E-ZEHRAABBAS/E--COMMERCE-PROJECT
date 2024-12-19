@@ -26,7 +26,7 @@
 
         body {
             font-family: "Times New Roman", serif;
-            background-color: #000000; /* Background Color */
+            background-color: #808080; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
@@ -36,7 +36,7 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #808080; /* Updated Darker Grey Panel Color */
+            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
             border: 3px solid #000;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -100,7 +100,7 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: #a9a9a9; /* Lighter Grey */
+            background-color: #adaaaa; /* Lighter Grey */
         }
 
         .options div:hover, .options div.selected {
@@ -153,7 +153,7 @@
             text-align: center;
             color: #666;
             cursor: pointer;
-            background-color: #a9a9a9; /* Lighter Grey */
+            background-color: #adaaaa; /* Lighter Grey */
             transition: background-color 0.3s ease;
         }
 
@@ -245,6 +245,48 @@
         #price {
             font-weight: bold; /* Bold the Price */
         }
+        #cart-panel 
+        { position: fixed; 
+            top: 0; right: -350px;
+             width: 300px; 
+             height: 100%; 
+             background-color: #fff; 
+             box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2); padding: 20px;
+              transition: right 0.3s ease-in-out; 
+              overflow-y: auto; }
+
+
+        #cart-panel.open 
+        { right: 0; }
+
+        #cart-panel .close-btn
+         { position: absolute; top:
+             10px; right: 10px; 
+             font-size: 1.5rem;
+              cursor: pointer; }
+
+        #cart-panel button 
+        { margin-top: 10px; 
+            padding: 10px;
+             border: none;
+              border-radius: 6px;
+               cursor: pointer; }
+
+        #checkout-form
+         { display: none;
+             margin-top: 20px; }
+
+        #checkout-form input, #checkout-form select
+         { width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px;
+             border: 1px solid #000; 
+             border-radius: 6px; }
+
+
+        #checkout-form button 
+        { background-color: #4b0b14; 
+            color: #fff; }
     </style>
 </head>
 <body>
@@ -254,7 +296,7 @@
     <div class="container">
         <!-- Shirt Display Panel -->
         <div class="shirt-panel">
-            <img src="https://i.pinimg.com/736x/b1/34/55/b1345549bd52ad27029cf885303e06eb.jpg" id="shirt-image" alt="Product Preview">
+            <img src="https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg" id="shirt-image" alt="Product Preview">
         </div>
 
         <!-- Content Section -->
@@ -307,8 +349,6 @@
                 <button>Add to Cart</button>
                 <button>Buy Now</button>
             </div>
-        </div>
-    </div>
 
     <!-- Size Chart Modal -->
     <div id="sizeChartModal" class="size-chart-modal">
@@ -316,7 +356,14 @@
             <span class="close-btn" onclick="closeSizeChart()">&times;</span>
             <iframe src="https://i.pinimg.com/736x/63/4c/b1/634cb11ccb0912a0501bd5b3638a9392.jpg"></iframe>
         </div>
+
+        <!-- Cart Panel -->
+    <div id="cart-panel">
+        <span class="close-btn" onclick="closeCart()">&times;</span>
     </div>
+    </div>
+
+    </body>
 
     <script>
         function selectOption(element) {
@@ -340,6 +387,87 @@
 
         function closeSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'none';
+        }
+        
+        let cart = [];
+
+        function selectOption(element) {
+            const siblings = element.parentElement.children;
+            for (let sibling of siblings) sibling.classList.remove('selected');
+            element.classList.add('selected');
+        }
+
+        function addToCart() {
+            const shirtName = document.getElementById('shirt-name').textContent;
+            const selectedSize = document.querySelector('.size-option.selected').textContent;
+            const selectedTechnique = document.querySelector('.technique-option.selected').textContent;
+            const price = parseFloat(document.getElementById('price').textContent.replace('$', ''));
+
+            const item = { name: shirtName, size: selectedSize, technique: selectedTechnique, price: price, quantity: 1 };
+            cart.push(item);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartPanel = document.getElementById('cart-panel');
+            cartPanel.innerHTML = `
+                <span class="close-btn" onclick="closeCart()">&times;</span>
+                <h3>Shopping Cart</h3>
+                ${cart.map((item, index) => `
+                    <div>
+                        <p>${item.name} (${item.size}, ${item.technique})</p>
+                        <p>Price: $${item.price.toFixed(2)}</p>
+                        <div>
+                            <button onclick="updateQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, 1)">+</button>
+                        </div>
+                        <p>Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                `).join('')}
+                <p>Total: $${cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</p>
+                <button onclick="clearCart()">Clear Cart</button>
+                <button onclick="showCheckoutForm()">Checkout</button>
+                <form id="checkout-form">
+                    <h3>Checkout</h3>
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="text" placeholder="Address" required>
+                    <select required>
+                        <option value="" disabled selected>Select Payment Method</option>
+                        <option value="COD">Cash on Delivery</option>
+                        <option value="Card">Card</option>
+                    </select>
+                    <button type="submit" onclick="confirmOrder(event)">Confirm Order</button>
+                </form>
+            `;
+            cartPanel.classList.add('open');
+        }
+
+        function showCheckoutForm() {
+            document.getElementById('checkout-form').style.display = 'block';
+        }
+
+        function confirmOrder(event) {
+            event.preventDefault();
+            alert('Order confirmed! Thank you for shopping with us.');
+            clearCart();
+            closeCart();
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function closeCart() {
+            document.getElementById('cart-panel').classList.remove('open');
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
         }
     </script>
 
