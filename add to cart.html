@@ -92,7 +92,7 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 250px; /* Make the panel smaller */
+            width: 300px;
             background: #fff;
             height: 100%;
             border-left: 2px solid #ccc;
@@ -191,8 +191,9 @@
             <h4>Enter Details</h4>
             <input type="text" id="name" class="checkout-input" placeholder="Enter your name" required />
             <input type="email" id="email" class="checkout-input" placeholder="Enter your email" required />
+            <input type="text" id="address" class="checkout-input" placeholder="Enter your address" required />
             <select id="payment-method" class="checkout-input" required>
-                <option value="cash">Cash</option>
+                <option value="cod">Cash on Delivery</option>
                 <option value="card">Card</option>
             </select>
             <button onclick="confirmOrder()">Confirm Order</button>
@@ -200,7 +201,7 @@
     </div>
 
     <script>
-        // Ensure cart is empty when the page loads
+        // Initialize the cart
         let cart = [];
 
         // Function to add item to the cart
@@ -212,25 +213,19 @@
                 image: "https://i.pinimg.com/736x/2c/40/d8/2c40d8d41985a136be87f2ed312ff58d.jpg"
             };
 
-            // Check if the item already exists in the cart
             const existingItem = cart.find(cartItem => cartItem.name === item.name);
 
             if (existingItem) {
-                // If item exists, increase the quantity
                 existingItem.quantity++;
             } else {
-                // If item doesn't exist, add the item to the cart
                 cart.push(item);
             }
 
-            // Update the cart panel
             updateCartPanel();
-
-            // Display the cart panel
             document.getElementById("cart-panel").style.display = "block";
         }
 
-        // Function to update the cart panel with current cart items and total
+        // Function to update the cart panel
         function updateCartPanel() {
             const cartItemsDiv = document.getElementById("cart-items");
             const totalBillDiv = document.getElementById("total-bill");
@@ -258,13 +253,13 @@
         // Function to change item quantity (+ or -)
         function changeQuantity(index, change) {
             const item = cart[index];
-            item.quantity = Math.max(1, item.quantity + change); // Ensure quantity doesn't go below 1
+            item.quantity = Math.max(1, item.quantity + change);
             updateCartPanel();
         }
 
         // Function to handle checkout process
         function proceedToCheckout() {
-            // Hide cart items and checkout button, show checkout form
+            // Hide the cart items and show the checkout form
             document.getElementById("cart-items").style.display = "none";
             document.getElementById("total-bill").style.display = "none";
             document.querySelector(".checkout-button").style.display = "none";
@@ -273,30 +268,23 @@
 
         // Function to confirm order and display order details
         function confirmOrder() {
-            // Collect user details for checkout
             const email = document.getElementById("email").value;
             const name = document.getElementById("name").value;
+            const address = document.getElementById("address").value;
             const paymentMethod = document.getElementById("payment-method").value;
 
-            // Validate the details
-            if (email && name && paymentMethod) {
-                // Update the cart panel with order summary details
+            if (email && name && address && paymentMethod) {
                 const orderSummary = `
                     <h4>Order Summary</h4>
                     <p><strong>Name:</strong> ${name}</p>
                     <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Address:</strong> ${address}</p>
                     <p><strong>Payment Method:</strong> ${paymentMethod}</p>
                     <p><strong>Total Price:</strong> $${calculateTotal()}</p>
                 `;
-
-                // Show the order summary in the cart panel
                 document.getElementById("cart-items").innerHTML = orderSummary;
-
-                // Hide the checkout form
                 document.getElementById("checkout-form").style.display = "none";
-
-                // Confirm the order to the user
-                alert(`Order Confirmed!\nName: ${name}\nEmail: ${email}\nPayment: ${paymentMethod}`);
+                alert("Order Confirmed!\nName: " + name + "\nEmail: " + email + "\nPayment: " + paymentMethod);
             } else {
                 alert("Please fill in all details!");
             }
@@ -311,10 +299,10 @@
         function clearCart() {
             cart = [];
             updateCartPanel();
+            document.getElementById("cart-panel").style.display = "none";  // Close the cart panel
             alert("Your cart has been cleared!");
         }
 
-        // Initial update to display cart if there are any items stored
         updateCartPanel();
     </script>
 </body>
