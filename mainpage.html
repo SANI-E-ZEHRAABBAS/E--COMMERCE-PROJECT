@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="favicon-16x16.png"
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchandise Store</title>
     <style>
@@ -11,38 +12,49 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Noto Sans Gothic';
-            background-color: #808080; /* Grey background */
+            background-color: #adaaaa; /* Grey background */
             overflow-x: hidden;
             height: 100%; /* Ensure no extra height */
         }
+.home-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 69px; /* Adjust height as needed */
+    background-color: #808080; /* Light grey color */
+    z-index: 999; /* Keeps the bar below the logo and hamburger */
+}
 
-        /* REMS Logo (Fixed) */
-        .rems-logo {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-family: 'Old English Text MT';
-            font-size: 36px;
-            color: #4b0b14; /* Fill color for the text */
-            font-weight: bold;
-            z-index: 1000;
-        }
+/* REMS Logo (Fixed) */
+.rems-logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: 'Old English Text MT';
+    font-size: 36px;
+    color: #4b0b14; /* Maroon fill color */
+    font-weight: bold;
+    z-index: 1000; /* Ensures logo stays above the bar */
+}
 
-        /* Hamburger Menu */
-        .hamburger {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            z-index: 1100;
-        }
+/* Hamburger Menu */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1100; /* Ensures the menu stays above the bar */
+}
 
-        .hamburger div {
-            width: 30px;
-            height: 3px;
-            background-color: #4b0b14; /* maroon lines */
-            margin: 5px 0;
-        }
+.hamburger div {
+    width: 30px;
+    height: 3px;
+    background-color: #4b0b14; /* Maroon lines */
+    margin: 5px 0;
+}
+
+     
 
         .side-panel {
             position: fixed;
@@ -52,7 +64,7 @@
             height: 100vh;
             overflow-y: auto; /* Enable scrolling inside the panel if needed */
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-            background-color: #f4f4f4;
+            background-color: #adaaaa;
             z-index: 1100;
         }
 
@@ -61,16 +73,16 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: #e0e0e0;
+            background-color: #808080;
             font-size: 1.5rem;
-            font-family: 'Times New Roman', serif;
-            color: #333;
+            font-family: 'Times New Roman';
+            color: #4b0b14;
         }
 
         .close-btn {
             cursor: pointer;
-            font-size: 1.5rem;
-            color: #333;
+            font-size: 1.2rem;
+            color: #4b0b14;
         }
 
         .side-panel-content {
@@ -79,6 +91,8 @@
             margin: 0;
             font-family: 'Times New Roman', serif;
             font-size: 1.2rem;
+            color: #4b0b14;
+            
         }
 
         .side-panel-content li {
@@ -121,7 +135,7 @@
         .main-content {
             display: none; /* Hidden until slide down */
             padding: 30px 10%;
-            background-color: #808080; /* Grey */
+            background-color: #adaaaa;
             position: relative;
             transition: transform 1s ease-in-out;
             height: calc(100vh - 30vh); /* Matches the new height after slideDown */
@@ -130,7 +144,7 @@
         .title {
             text-align: center;
             font-size: 2rem;
-            color: #000000; /* Coal */
+            color: #4b0b14; /* Coal */
             margin-bottom: 20px;
             font-family: 'Times New Roman', serif;
         }
@@ -144,8 +158,9 @@
         }
 
         .panel {
-            background-color: #808080;
-            border: 2px solid #808080;
+            background-color: #adaaaa;
+            background-color: #adaaaa; /* maroon background */
+            border: 2px solid #;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -160,7 +175,7 @@
             width: 100%;
             height: 250px;
             object-fit: cover;
-            border-bottom: 2px solid #000000;
+            border-bottom: 2px solid #0000;
         }
 
         .panel span {
@@ -171,15 +186,15 @@
         }
 
         .footer {
-            background-color: #4b0b14; /* maroon background */
-            color: #000000; /* grey text */
+            background-color: #808080; /* maroon background */
+            color: #4b0b14; /* grey text */
             text-align: center;
-            padding: 10px 10px;
-            margin-top: 10px;
+            padding: 5px 5px;
+            margin-top: 80px;
         }
 
         .footer .newsletter h3 {
-            font-size: 1.2rem;
+            font-size: 2rem;
             margin-bottom: 5px;
         }
 
@@ -187,28 +202,28 @@
             padding: 5px 10px;
             width: 80%;
             max-width: 300px;
-            margin-bottom: 15px;
+            margin-bottom: 15px;s
             border: 2px solid #000000;
             background-color:transparent;
-            color: #808080;
+            color: #4b0b14;
             outline: none;
         }
 
         .footer .social-links {
             margin: 10px 0;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .footer .social-links a {
-            color: #808080;
+            color: #4b0b14;
             text-decoration: none;
             margin: 0 5px;
         }
 
         .footer .footer-logo h1 {
             font-family: 'Old English Text MT'; /* font */
-            font-size: 36px; /* Adjust font size */
-            color: #000000; /* Fill color for the text */
+            font-size: 40px; /* Adjust font size */
+            color: #4b0b14; /* Fill color for the text */
             font-weight: bold; /* Make text bold (optional) */
         }
 
@@ -222,18 +237,29 @@
         }
 
         .footer-links a {
-            color: #808080;
+            color: #4b0b14;
             text-decoration: none;
             display: block;
             margin: 5px 0;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .footer .copyright {
-            font-size: 0.8rem;
+            font-size: 1rem;
             margin-top: 20px;
             opacity: 0.8;
         }
+        // Open Side Panel
+function openPanel() {
+    document.getElementById('sidePanel').style.left = '0';
+}
+
+// Close Side Panel
+function closePanel() {
+    document.getElementById('sidePanel').style.left = '-300px';
+}
+
+
     </style>
 </head>
 <body>
@@ -246,6 +272,12 @@
         <div></div>
         <div></div>
     </div>
+    <header class="home-bar">
+        <div></div>
+
+        </div>
+    </header>
+    
 
     <!-- Side Panel -->
     <div class="side-panel" id="sidePanel">
@@ -254,42 +286,51 @@
             <div class="close-btn" onclick="closePanel()">&times;</div>
         </div>
         <ul class="side-panel-content">
-            <li>Hoodies</li>
-            <li>Shirts</li>
-            <li>Pants</li>
-            <li>Headwear</li>
+           <a href="hoodies.html"> <li>Hoodies</li> </a>
+           <a href="shirts.html"> <li>Shirts</li> </a>
+            <a href="pants2.html"> <li>Pants</li> </a>
+            <a href="headwear.html"> <li>Headwear</li> </a>
         </ul>
     </div>
 
     <!-- Fullscreen Slideshow -->
     <div id="top-image">
-        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/736x/33/4a/b4/334ab415172412dd0e2fccc93b1f9d41.jpg');"></div>
-        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/736x/e0/f4/d9/e0f4d914204d2e3800b96e9c6a20c8bd.jpg');"></div>
-        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/736x/f3/51/bd/f351bd24cee6ddbc5aac98621851a475.jpg');"></div>
-        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/736x/c4/c7/16/c4c716a33d46fb0e77187f3a78885256.jpg');"></div>
+    
+        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/3b/bc/0a/3bbc0a4bc0d760e2f17f105fe95467dc.gif');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/5119917/pexels-photo-5119917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3689147/pexels-photo-3689147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3062592/pexels-photo-3062592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
     </div>
 
     <div class="main-content">
         <h1 class="title">Explore Our Merchandise</h1>
         <div class="panels-container">
             <div class="panel">
+                <a href="hoodies.html">
                 <img src="https://i.pinimg.com/736x/08/dd/39/08dd39bc2f47e8f68a64c40f2a2f132d.jpg" alt="Hoodies">
                 <span>Hoodies</span>
+            </a>
             </div>
             <!-- Shirts Panel -->
             <div class="panel">
+                <a href="shirts.html">
                 <img src="https://i.pinimg.com/736x/3c/b7/37/3cb737c3d32b53fc24d8062af4e13d48.jpg" alt="Shirts">
                 <span>Shirts</span>
+                </a>
             </div>
             <!-- Pants Panel -->
             <div class="panel">
+                <a href="pants2.html">
                 <img src="https://i.pinimg.com/736x/92/8e/15/928e151d536280380cd091d3e4f78491.jpg" alt="Pants">
                 <span>Pants</span>
+                </a>
             </div>
             <!-- Headwear Panel -->
             <div class="panel">
+                <a href="headwear.html">
                 <img src="https://i.pinimg.com/736x/f8/b9/64/f8b964a766f962cb43660fd4789e77bf.jpg" alt="Headwear">
                 <span>Headwear</span>
+                </a>
             </div>
         </div>
         
@@ -330,48 +371,77 @@
             </div>
         </footer>
     </div>
-
     <script>
         // Open Side Panel
         function openPanel() {
             document.getElementById('sidePanel').style.left = '0';
         }
-
+    
         // Close Side Panel
         function closePanel() {
             document.getElementById('sidePanel').style.left = '-300px';
         }
-
+    
         // Slideshow Functionality
         const images = document.querySelectorAll('.slideshow-image');
         let currentIndex = 0;
-
+    
         function showNextImage() {
             images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
             images[currentIndex].classList.add('active');
         }
-
+    
         // Initialize Slideshow
         images[currentIndex].classList.add('active');
         setInterval(showNextImage, 3000); // Change image every 3 seconds
-
-        // Slide Down on Arrow Key or Swipe Up
+    
+        // Slide Down and Slide Up on Arrow Key or Swipe Gestures
         const topImage = document.getElementById('top-image');
         const mainContent = document.querySelector('.main-content');
-
+    
         function slideDown() {
             topImage.classList.add('half'); // Shrinks top image
             mainContent.style.display = 'block'; // Make main content visible
             mainContent.style.transform = 'translateY(0)';
         }
-
-        // Arrow Key Event
+    
+        function slideUp() {
+            topImage.classList.remove('half'); // Expands top image back
+            mainContent.style.display = 'none'; // Hide main content
+            mainContent.style.transform = 'translateY(-100%)';
+        }
+    
+        // Arrow Key Events
         document.addEventListener('keydown', function (e) {
             if (e.key === 'ArrowDown') {
+                slideDown();
+            } else if (e.key === 'ArrowUp') {
+                slideUp();
+            }
+        });
+    
+        // Touch Events for Swipe Gestures
+        let startY = 0;
+    
+        document.addEventListener('touchstart', function (e) {
+            startY = e.touches[0].clientY;
+        });
+    
+        document.addEventListener('touchmove', function (e) {
+            const endY = e.touches[0].clientY;
+    
+            // Swipe Down
+            if (endY - startY > 50) {
+                slideUp();
+            }
+    
+            // Swipe Up
+            if (startY - endY > 50) {
                 slideDown();
             }
         });
     </script>
+    
 </body>
 </html>

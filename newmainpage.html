@@ -1,0 +1,276 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="favicon-16x16.png"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchandise Store</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Gothic';
+            background-color: #adaaaa; /* Grey background */
+            overflow-x: hidden;
+            height: 100%; /* Ensure no extra height */
+        }
+        .home-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 69px; /* Adjust height as needed */
+            background-color: #808080; /* Light grey color */
+            z-index: 999; /* Keeps the bar below the logo and hamburger */
+        }
+
+        /* REMS Logo (Fixed) */
+        .rems-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Old English Text MT';
+            font-size: 36px;
+            color: #4b0b14; /* Maroon fill color */
+            font-weight: bold;
+            z-index: 1000; /* Ensures logo stays above the bar */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1100; /* Ensures the menu stays above the bar */
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #4b0b14; /* Maroon lines */
+            margin: 5px 0;
+        }
+
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Off-screen */
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto; /* Enable scrolling inside the panel if needed */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #adaaaa;
+            z-index: 1100;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #808080;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman';
+            color: #4b0b14;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #4b0b14;
+        }
+
+        .side-panel-content {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #4b0b14;
+        }
+
+        .side-panel-content li {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        .side-panel-content li:hover {
+            text-decoration: underline;
+        }
+
+        /* Slideshow Container */
+        #top-image {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            transition: all 1s ease-in-out;
+        }
+
+        .slideshow-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-image.active {
+            opacity: 1;
+        }
+
+        /* Video in slideshow */
+        #top-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Shrink to Half */
+        #top-image.half {
+            height: 30vh;
+        }
+
+        .main-content {
+            display: none; /* Hidden until slide down */
+            padding: 30px 10%;
+            background-color: #adaaaa;
+            position: relative;
+            transition: transform 1s ease-in-out;
+            height: calc(100vh - 30vh); /* Matches the new height after slideDown */
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            color: #4b0b14; /* Coal */
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        /* Panels Grid */
+        .panels-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .panel {
+            background-color: #adaaaa;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 200px;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel img,
+        .panel video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 2px solid #0000;
+        }
+
+        .panel span {
+            display: block;
+            margin-top: 2px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #808080; /* maroon background */
+            color: #4b0b14; /* grey text */
+            text-align: center;
+            padding: 5px 5px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- REMS Logo -->
+    <div class="rems-logo">REMS</div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="openPanel()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <!-- Side Panel -->
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <span>Menu</span>
+            <div class="close-btn" onclick="closePanel()">&times;</div>
+        </div>
+        <ul class="side-panel-content">
+            <li>Hoodies</li>
+            <li>Shirts</li>
+            <li>Pants</li>
+            <li>Headwear</li>
+        </ul>
+    </div>
+
+    <!-- Fullscreen Slideshow -->
+    <div id="top-image">
+        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/3b/bc/0a/3bbc0a4bc0d760e2f17f105fe95467dc.gif');"></div>
+        <div class="slideshow-image">
+            <video src="path/to/video1.mp4" autoplay muted loop></video>
+        </div>
+        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/95/d8/22/95d8226c270da81497c477326fd84ba4.gif');"></div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="title">Explore Our Merchandise</h1>
+        <div class="panels-container">
+            <div class="panel">
+                <video src="path/to/panel-video.mp4" controls></video>
+                <span>Video Panel</span>
+            </div>
+            <div class="panel">
+                <img src="https://i.pinimg.com/736x/08/dd/39/08dd39bc2f47e8f68a64c40f2a2f132d.jpg" alt="Hoodies">
+                <span>Hoodies</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Open Side Panel
+        function openPanel() {
+            document.getElementById('sidePanel').style.left = '0';
+        }
+
+        // Close Side Panel
+        function closePanel() {
+            document.getElementById('sidePanel').style.left = '-300px';
+        }
+
+        // Slideshow Functionality
+        const slides = document.querySelectorAll('.slideshow-image');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentIndex);
+            });
+            currentIndex = (currentIndex + 1) % slides.length;
+        }
+
+        // Initialize Slideshow
+        showNextSlide();
+        setInterval(showNextSlide, 3000);
+    </script>
+</body>
+</html>
+
