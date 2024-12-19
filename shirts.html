@@ -15,6 +15,18 @@
             scroll-behavior: smooth; /* Enable smooth scrolling */
             color: #000000; /* Black */
         }
+        
+        /* REMS Logo (Fixed) */
+        .rems-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Old English Text MT';
+            font-size: 36px;
+            color: #4b0b14; /* Fill color for the text */
+            font-weight: bold;
+            z-index: 1000;
+        }
 
         /* Full-screen top image */
         #top-image {
@@ -29,12 +41,12 @@
         /* Filter icon */
         .filter-icon {
             position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #4b0b14;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
+            top: 20px;
+            right: 20px;
+            color: #4b0b14;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
         }
 
         /* Dropdown styles */
@@ -96,6 +108,7 @@
             transition: transform 0.3s ease;
             width: 300px; /* Increased width to match the grid */
             margin: 0 auto; /* Center each panel */
+            cursor: pointer; /* Indicate clickability */
         }
 
         .panel:hover {
@@ -133,6 +146,9 @@
     </style>
 </head>
 <body>
+    <!-- REMS Logo -->
+    <div class="rems-logo">REMS</div>
+
     <!-- Top Image Section -->
     <div id="top-image">
         <!-- Filter Icon -->
@@ -149,25 +165,25 @@
     <div class="main-content">
         <h1 class="title">Explore Our Shirts Collection</h1>
         <div id="panelsContainer" class="panels-container">
-            <div class="panel" data-name="Sweat Shirt" data-price="25">
-                <img src="https://i.pinimg.com/736x/f0/52/f0/f052f0a6c50cf195bc0365927d457b37.jpg" alt="Cargo Pants">
-                <span>Sweat Shirt</span>
-                <span class="price">$25</span>
+            <div class="panel" data-name="Sweat Shirt" data-price="30" onclick="redirectToCustomization('https://i.pinimg.com/736x/f0/52/f0/f052f0a6c50cf195bc0365927d457b37.jpg')">
+                <a href="customizationS.html"><img src="https://i.pinimg.com/736x/f0/52/f0/f052f0a6c50cf195bc0365927d457b37.jpg" alt="Sweat Shirt">
+                <span>Sweat Shirt</span></a>
+                <span class="price">$24.99</span>
             </div>
-            <div class="panel" data-name="Long Sleeved Shirt" data-price="20">
-                <img src="https://i.pinimg.com/736x/03/f5/43/03f543ed2ee16071f3d42a634aadd0ce.jpg" alt="Sweat Pants">
-                <span>Long Sleeved Shirt</span>
-                <span class="price">$20</span>
+            <div class="panel" data-name="Long Sleeved Shirt" data-price="28" onclick="redirectToCustomization('https://i.pinimg.com/736x/03/f5/43/03f543ed2ee16071f3d42a634aadd0ce.jpg')">
+                <a href="customizationL.html"><img src="https://i.pinimg.com/736x/03/f5/43/03f543ed2ee16071f3d42a634aadd0ce.jpg" alt="Long Sleeved Shirt">
+                <span>Long Sleeved Shirt</span></a>
+                <span class="price">$20.99</span>
             </div>
-            <div class="panel" data-name="Oversized Shirt" data-price="30">
-                <img src="https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg" alt="Wide Leg Pants">
-                <span>Oversized Shirt</span>
-                <span class="price">$30</span>
+            <div class="panel" data-name="Oversized Shirt" data-price="35" onclick="redirectToCustomization('https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg')">
+                <a href="customizationO.html"><img src="https://i.pinimg.com/736x/5a/30/48/5a30481128e487787c3fb7b92ba41bf8.jpg" alt="Oversized Shirt">
+                <span>Oversized Shirt</span></a>
+                <span class="price">$22.99</span>
             </div>
-            <div class="panel" data-name="Regular Fit Shirt" data-price="15">
-                <img src="https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg" alt="Straight Fit Pants">
-                <span>Regular Fit Shirt</span>
-                <span class="price">$15</span>
+            <div class="panel" data-name="Regular Fit Shirt" data-price="25" onclick="redirectToCustomization('https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg')">
+                <a href="customizationR.html"><img src="https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg" alt="Regular Fit Shirt">
+                <span>Regular Fit Shirt</span></a>
+                <span class="price">$19.99</span>
             </div>
         </div>
     </div>
@@ -211,6 +227,11 @@
             panels.sort((a, b) => parseFloat(b.dataset.price) - parseFloat(a.dataset.price));
             panels.forEach(panel => panelsContainer.appendChild(panel));
             scrollToPanels();
+        }
+
+        // Redirect to customization page with the selected image
+        function redirectToCustomization(imageUrl) {
+            window.location.href = `customization.html?image=${encodeURIComponent(imageUrl)}`;
         }
     </script>
 </body>

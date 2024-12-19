@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shirt Customization</title>
+    <title>Product Customization</title>
     <style>
         /* General Reset */
         * {
@@ -12,19 +12,31 @@
             box-sizing: border-box;
         }
 
+        /* REMS Logo (Fixed) */
+        .rems-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Old English Text MT';
+            font-size: 36px;
+            color: #4b0b14; /* Fill color for the text */
+            font-weight: bold;
+            z-index: 1000;
+        }
+
         body {
             font-family: "Times New Roman", serif;
-            background-color: #000000; /* Background Color */
+            background-color: #808080; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
-
+        
         /* Container Styles */
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #808080; /* Updated Darker Grey Panel Color */
+            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
             border: 3px solid #000;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -189,6 +201,7 @@
         .buttons button:last-child:hover {
             background-color: #4b0b14;
         }
+        
 
         /* Size Chart Modal */
         .size-chart-modal {
@@ -233,19 +246,63 @@
         #price {
             font-weight: bold; /* Bold the Price */
         }
+        #cart-panel 
+        { position: fixed; 
+            top: 0; right: -350px;
+             width: 300px; 
+             height: 100%; 
+             background-color: #fff; 
+             box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2); padding: 20px;
+              transition: right 0.3s ease-in-out; 
+              overflow-y: auto; }
+
+
+        #cart-panel.open 
+        { right: 0; }
+
+        #cart-panel .close-btn
+         { position: absolute; top:
+             10px; right: 10px; 
+             font-size: 1.5rem;
+              cursor: pointer; }
+
+        #cart-panel button 
+        { margin-top: 10px; 
+            padding: 10px;
+             border: none;
+              border-radius: 6px;
+               cursor: pointer; }
+
+        #checkout-form
+         { display: none;
+             margin-top: 20px; }
+
+        #checkout-form input, #checkout-form select
+         { width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px;
+             border: 1px solid #000; 
+             border-radius: 6px; }
+
+
+        #checkout-form button 
+        { background-color: #4b0b14; 
+            color: #fff; }
     </style>
 </head>
 <body>
+    <!-- REMS Logo -->
+    <div class="rems-logo">REMS</div>
+
     <div class="container">
         <!-- Shirt Display Panel -->
-        <div class="shirt-panel">
-            <img src="https://i.pinimg.com/736x/f8/dd/6b/f8dd6bd93d0fdd92e60d0235f0ba08e1.jpg" id="shirt-image" alt="Shirt Preview">
+        <div class="Pants-Panel">
+            <img src="https://i.pinimg.com/736x/d0/93/1a/d0931a5674e0e28c67356fe34c2fc8ed.jpg">
         </div>
 
         <!-- Content Section -->
         <div class="content">
-            <!-- Name of Selected Option -->
-            <h1 class="escorter" id="shirt-name">Oversized Shirts</h1>
+            <h1 class="escorter" id="shirt-name">Straight Fit Pant</h1>
 
             <!-- Technique Selection -->
             <h3 class="small-heading">Technique</h3>
@@ -255,15 +312,15 @@
             </div>
 
             <!-- Color Selection -->
-            <h3 class="small-heading">Colours</h3>
+            <h3 class="small-heading">Colors</h3>
             <div class="color-options" id="color-options">
-                <div class="color-box" style="background-color: #011325;"></div>
-                <div class="color-box" style="background-color: #002001;"></div>
-                <div class="color-box" style="background-color: #000000;"></div>
-                <div class="color-box" style="background-color: #36030a;"></div>
-                <div class="color-box" style="background-color: #5a5959;"></div>
-                <div class="color-box" style="background-color: #FFFFFF;"></div>
-                <div class="color-box" style="background-color: #a78165;"></div>
+                <div class="color-box" style="background-color: #011325;" onclick="selectColor('#011325')"></div>
+                <div class="color-box" style="background-color: #002001;" onclick="selectColor('#002001')"></div>
+                <div class="color-box" style="background-color: #000000;" onclick="selectColor('#000000')"></div>
+                <div class="color-box" style="background-color: #36030a;" onclick="selectColor('#36030a')"></div>
+                <div class="color-box" style="background-color: #5a5959;" onclick="selectColor('#5a5959')"></div>
+                <div class="color-box" style="background-color: #FFFFFF;" onclick="selectColor('#FFFFFF')"></div>
+                <div class="color-box" style="background-color: #a78165;" onclick="selectColor('#a78165')"></div>
             </div>
 
             <!-- Size Selection -->
@@ -278,7 +335,7 @@
 
             <!-- Price Display -->
             <h3 class="small-heading">Price</h3>
-            <p id="price">$49.99</p>
+            <p id="price">$25</p>
 
             <!-- File Upload -->
             <h3 class="small-heading">Create Your Own Style</h3>
@@ -293,8 +350,13 @@
                 <button>Add to Cart</button>
                 <button>Buy Now</button>
             </div>
+            <!-- Cart Panel -->
+    <div id="cart-panel">
+        <span class="close-btn" onclick="closeCart()">&times;</span>
+    
         </div>
     </div>
+
 
     <!-- Size Chart Modal -->
     <div id="sizeChartModal" class="size-chart-modal">
@@ -313,6 +375,13 @@
             element.classList.add('selected');
         }
 
+        function selectColor(color) {
+            const colorBoxes = document.querySelectorAll('.color-box');
+            colorBoxes.forEach(box => box.classList.remove('selected'));
+            event.target.classList.add('selected');
+            document.getElementById('shirt-image').style.filter = `brightness(1) saturate(1) sepia(1) hue-rotate(${color})`;
+        }
+
         function openSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'flex';
         }
@@ -320,6 +389,8 @@
         function closeSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'none';
         }
+        
     </script>
+
 </body>
 </html>

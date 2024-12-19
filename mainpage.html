@@ -21,7 +21,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 69px; /* Adjust height as needed */
+    height: 68px; /* Adjust height as needed */
     background-color: #808080; /* Light grey color */
     z-index: 999; /* Keeps the bar below the logo and hamburger */
 }
@@ -33,7 +33,7 @@
     right: 20px;
     font-family: 'Old English Text MT';
     font-size: 36px;
-    color: #4b0b14; /* Maroon fill color */
+    color:#4b0b14; /* Maroon fill color */
     font-weight: bold;
     z-index: 1000; /* Ensures logo stays above the bar */
 }
@@ -141,14 +141,13 @@
             height: calc(100vh - 30vh); /* Matches the new height after slideDown */
         }
 
-        .title {
+       .title {
             text-align: center;
             font-size: 2rem;
-            color: #4b0b14; /* Coal */
+            color: #00000; 
             margin-bottom: 20px;
-            font-family: 'Times New Roman', serif;
-        }
-
+            font-family: 'Times New Roman';
+        }    
         /* Panels Grid */
         .panels-container {
             display: flex;
@@ -158,9 +157,9 @@
         }
 
         .panel {
-            background-color: #adaaaa;
+            color: #0000;
             background-color: #adaaaa; /* maroon background */
-            border: 2px solid #;
+            border: 2px solid #adaaaa;
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -195,7 +194,7 @@
 
         .footer .newsletter h3 {
             font-size: 2rem;
-            margin-bottom: 5px;
+            margin-bottom: 5 px;
         }
 
         .footer input {
@@ -203,7 +202,7 @@
             width: 80%;
             max-width: 300px;
             margin-bottom: 15px;s
-            border: 2px solid #000000;
+            border: 2px solid;
             background-color:transparent;
             color: #4b0b14;
             outline: none;
@@ -296,14 +295,14 @@ function closePanel() {
     <!-- Fullscreen Slideshow -->
     <div id="top-image">
     
-        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/3b/bc/0a/3bbc0a4bc0d760e2f17f105fe95467dc.gif');"></div>
+        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/53/6c/bf/536cbfeea274edbc7580034eb63590e2.gif');"></div>
         <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/5119917/pexels-photo-5119917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
         <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3689147/pexels-photo-3689147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
         <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3062592/pexels-photo-3062592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
     </div>
 
     <div class="main-content">
-        <h1 class="title">Explore Our Merchandise</h1>
+        <h1 class="title">Explore Our Merchendise</h1>
         <div class="panels-container">
             <div class="panel">
                 <a href="hoodies.html">
@@ -394,7 +393,7 @@ function closePanel() {
     
         // Initialize Slideshow
         images[currentIndex].classList.add('active');
-        setInterval(showNextImage, 3000); // Change image every 3 seconds
+        setInterval(showNextImage, 8000); // Change image every 3 seconds
     
         // Slide Down and Slide Up on Arrow Key or Swipe Gestures
         const topImage = document.getElementById('top-image');
