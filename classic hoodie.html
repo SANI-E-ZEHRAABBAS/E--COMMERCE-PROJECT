@@ -195,7 +195,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(29, 27, 27, 0.6);
             justify-content: center;
             align-items: center;
         }
@@ -333,38 +333,6 @@
         </div>
     </div>
 
-<!-- Size Chart Modal -->
-<div id="sizeChartModal" class="size-chart-modal">
-    <div class="size-chart-content">
-        <span class="close-btn" onclick="closeSizeChart()">&times;</span>
-        <iframe src="https://i.pinimg.com/736x/63/4c/b1/634cb11ccb0912a0501bd5b3638a9392.jpg"></iframe>
-    </div>
-</div>
-
-<script>
-    function selectOption(element) {
-        const siblings = element.parentElement.children;
-        for (let sibling of siblings) {
-            sibling.classList.remove('selected');
-        }
-        element.classList.add('selected');
-    }
-
-    function selectColor(color) {
-        const colorBoxes = document.querySelectorAll('.color-box');
-        colorBoxes.forEach(box => box.classList.remove('selected'));
-        event.target.classList.add('selected');
-        document.getElementById('shirt-image').style.filter = brightness(1) saturate(1) sepia(1) hue-rotate(${color});
-    }
-
-    function openSizeChart() {
-        document.getElementById('sizeChartModal').style.display = 'flex';
-    }
-
-    function closeSizeChart() {
-        document.getElementById('sizeChartModal').style.display = 'none';
-    }
-
     <!-- Cart Panel -->
     <div id="cart-panel">
         <span class="close-btn" onclick="closeCart()">&times;</span>
@@ -451,7 +419,7 @@
             cart = [];
             updateCartUI();
         }
-
+        
     </script>
 </body>
 </html>
