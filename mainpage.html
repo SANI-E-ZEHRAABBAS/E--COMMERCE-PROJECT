@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="favicon-16x16.png"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchandise Store</title>
+    <style>
+        /* General Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Gothic';
+            background-color: #adaaaa; /* Grey background */
+            overflow-x: hidden;
+            height: 100%; /* Ensure no extra height */
+        }
+.home-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 68px; /* Adjust height as needed */
+    background-color: #808080; /* Light grey color */
+    z-index: 999; /* Keeps the bar below the logo and hamburger */
+}
+
+/* REMS Logo (Fixed) */
+.rems-logo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-family: 'Old English Text MT';
+    font-size: 36px;
+    color:#4b0b14; /* Maroon fill color */
+    font-weight: bold;
+    z-index: 1000; /* Ensures logo stays above the bar */
+}
+
+/* Hamburger Menu */
+.hamburger {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1100; /* Ensures the menu stays above the bar */
+}
+
+.hamburger div {
+    width: 30px;
+    height: 3px;
+    background-color: #4b0b14; /* Maroon lines */
+    margin: 5px 0;
+}
+
+     
+
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Off-screen */
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto; /* Enable scrolling inside the panel if needed */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #adaaaa;
+            z-index: 1100;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #808080;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman';
+            color: #4b0b14;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #4b0b14;
+        }
+
+        .side-panel-content {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #4b0b14;
+            
+        }
+
+        .side-panel-content li {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        .side-panel-content li:hover {
+            text-decoration: underline;
+        }
+
+        /* Slideshow Container */
+        #top-image {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            transition: all 1s ease-in-out;
+        }
+
+        .slideshow-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-image.active {
+            opacity: 1;
+        }
+
+        /* Shrink to Half */
+        #top-image.half {
+            height: 30vh;
+        }
+
+        .main-content {
+            display: none; /* Hidden until slide down */
+            padding: 30px 10%;
+            background-color: #adaaaa;
+            position: relative;
+            transition: transform 1s ease-in-out;
+            height: calc(100vh - 30vh); /* Matches the new height after slideDown */
+        }
+
+       .title {
+            text-align: center;
+            font-size: 2rem;
+            color: #0000; 
+            margin-bottom: 20px;
+            font-family: 'Times New Roman';
+        }    
+        /* Panels Grid */
+        .panels-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .panel {
+            color: #0000;
+            background-color: #adaaaa; /* maroon background */
+            border: 2px solid #adaaaa;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            width: 200px;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+        }
+
+        .panel img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 2px solid #0000;
+        }
+
+        .panel span {
+            display: block;
+            margin-top: 2px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #808080; /* maroon background */
+            color: #4b0b14; /* grey text */
+            text-align: center;
+            padding: 5px 5px;
+            margin-top: 80px;
+        }
+
+        .footer .newsletter h3 {
+            font-size: 2rem;
+            margin-bottom: 5 px;
+        }
+
+        .footer input {
+            padding: 5px 10px;
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            border: 2px;
+            background-color:transparent;
+            color: #4b0b14;
+            outline: none;
+        }
+
+        .footer .social-links {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .footer .social-links a {
+            color: #4b0b14;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .footer .footer-logo h1 {
+            font-family: 'Old English Text MT'; /* font */
+            font-size: 40px; /* Adjust font size */
+            color: #4b0b14; /* Fill color for the text */
+            font-weight: bold; /* Make text bold (optional) */
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .footer-links a {
+            color: #4b0b14;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        .footer .copyright {
+            font-size: 1rem;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- REMS Logo -->
+    <div class="rems-logo">REMS</div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="openPanel()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <header class="home-bar">
+        <div></div>
+
+        </div>
+    </header>
+    
+
+    <!-- Side Panel -->
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <span>Menu</span>
+            <div class="close-btn" onclick="closePanel()">&times;</div>
+        </div>
+        <ul class="side-panel-content">
+           <a href="hoodies.html"> <li>Hoodies</li> </a>
+           <a href="shirts.html"> <li>Shirts</li> </a>
+            <a href="pants2.html"> <li>Pants</li> </a>
+            <a href="headwear.html"> <li>Headwear</li> </a>
+        </ul>
+    </div>
+
+    <!-- Fullscreen Slideshow -->
+    <div id="top-image">
+    
+        <div class="slideshow-image" style="background-image: url('https://i.pinimg.com/originals/53/6c/bf/536cbfeea274edbc7580034eb63590e2.gif');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/5119917/pexels-photo-5119917.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3689147/pexels-photo-3689147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+        <div class="slideshow-image" style="background-image: url('https://images.pexels.com/photos/3062592/pexels-photo-3062592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="title">Explore Our Merchendise</h1>
+        <div class="panels-container">
+            <div class="panel">
+                <a href="hoodies.html">
+                <img src="https://i.pinimg.com/736x/08/dd/39/08dd39bc2f47e8f68a64c40f2a2f132d.jpg" alt="Hoodies">
+                <span>Hoodies</span>
+            </a>
+            </div>
+            <!-- Shirts Panel -->
+            <div class="panel">
+                <a href="shirts.html">
+                <img src="https://i.pinimg.com/736x/3c/b7/37/3cb737c3d32b53fc24d8062af4e13d48.jpg" alt="Shirts">
+                <span>Shirts</span>
+                </a>
+            </div>
+            <!-- Pants Panel -->
+            <div class="panel">
+                <a href="pants2.html">
+                <img src="https://i.pinimg.com/736x/92/8e/15/928e151d536280380cd091d3e4f78491.jpg" alt="Pants">
+                <span>Pants</span>
+                </a>
+            </div>
+            <!-- Headwear Panel -->
+            <div class="panel">
+                <a href="headwear.html">
+                <img src="https://i.pinimg.com/736x/f8/b9/64/f8b964a766f962cb43660fd4789e77bf.jpg" alt="Headwear">
+                <span>Headwear</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="newsletter">
+                <h3>Get the latest trends first</h3>
+                <input type="email" placeholder="Enter your email" />
+            </div>
+            <div class="social-links">
+                <a href="#">Facebook</a> | 
+                <a href="#">Instagram</a> | 
+                <a href="#">YouTube</a> | 
+                <a href="#">TikTok</a> | 
+                <a href="#">Pinterest</a>
+            </div>
+            <div class="footer-logo">
+                <h1>REMS</h1>
+            </div>
+            <div class="footer-links">
+                <div class="left-links">
+                    <a href="#">FAQ'S</a>
+                    <a href="#">Log In/Sign Up</a>
+                    <a href="#">How To Buy</a>
+                    <a href="#">Payment</a>
+                    <a href="#">Shipping & Deliveries</a>
+                    <a href="#">Exchange & Returns</a>
+                </div>
+                <div class="right-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Retail Stores</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Work With Us</a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; Copyright Reserved by REMS 2024
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Open Side Panel
+        function openPanel() {
+            document.getElementById('sidePanel').style.left = '0';
+        }
+    
+        // Close Side Panel
+        function closePanel() {
+            document.getElementById('sidePanel').style.left = '-300px';
+        }
+    
+        // Slideshow Functionality
+        const images = document.querySelectorAll('.slideshow-image');
+        let currentIndex = 0;
+    
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+    
+        // Initialize Slideshow
+        images[currentIndex].classList.add('active');
+        setInterval(showNextImage, 8000); // Change image every 3 seconds
+    
+        // Slide Down and Slide Up on Arrow Key or Swipe Gestures
+        const topImage = document.getElementById('top-image');
+        const mainContent = document.querySelector('.main-content');
+    
+        function slideDown() {
+            topImage.classList.add('half'); // Shrinks top image
+            mainContent.style.display = 'block'; // Make main content visible
+            mainContent.style.transform = 'translateY(0)';
+        }
+    
+        function slideUp() {
+            topImage.classList.remove('half'); // Expands top image back
+            mainContent.style.display = 'none'; // Hide main content
+            mainContent.style.transform = 'translateY(-100%)';
+        }
+    
+        // Arrow Key Events
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowDown') {
+                slideDown();
+            } else if (e.key === 'ArrowUp') {
+                slideUp();
+            }
+        });
+    
+        // Touch Events for Swipe Gestures
+        let startY = 0;
+    
+        document.addEventListener('touchstart', function (e) {
+            startY = e.touches[0].clientY;
+        });
+    
+        document.addEventListener('touchmove', function (e) {
+            const endY = e.touches[0].clientY;
+    
+            // Swipe Down
+            if (endY - startY > 50) {
+                slideUp();
+            }
+    
+            // Swipe Up
+            if (startY - endY > 50) {
+                slideDown();
+            }
+        });
+    </script>
+    
+</body>
+</html>
