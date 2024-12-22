@@ -11,42 +11,59 @@
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #adaaaa; /* Grey */
+            background-color: #fff; /* White */
             scroll-behavior: smooth; /* Enable smooth scrolling */
-            color: #4b0b14; /* Black */
+            color: #000; /* Black */
         }
-        
+        .home-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Adjust height as needed */
+            background-color: #000; /* Light grey color */
+            z-index: 999; /* Keeps the bar below the logo and hamburger */
+        }
+
         /* REMS Logo (Fixed) */
         .rems-logo {
             position: fixed;
-            top: 20px;
+            top: 8px;
             right: 20px;
             font-family: 'Old English Text MT';
-            font-size: 36px;
-            color: #4b0b14; /* Fill color for the text */
+            font-size: 40px;
+            color: #bc021b; /* Maroon fill color */
             font-weight: bold;
-            z-index: 1000;
+            z-index: 1000; /* Ensures logo stays above the bar */
         }
 
         /* Full-screen top image */
         #top-image {
+            position: relative;
             width: 100%;
             height: 80vh; /* Half the viewport height */
-            background-image: url("https://images.pexels.com/photos/9898374/pexels-photo-9898374.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-            background-size: cover;
-            background-position: center;
-            position: relative;
+            overflow: hidden;
+        }
+
+        .gif-background {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         /* Filter icon */
         .filter-icon {
-            position: absolute;
+            position: fixed;
             top: 20px;
             left: 20px;
-            color: #4b0b14;
+            color: #bc021b;
             font-size: 2rem;
             cursor: pointer;
             line-height: 1;
+            z-index: 1001;
         }
 
         /* Dropdown styles */
@@ -55,8 +72,8 @@
             position: absolute;
             top: 60px;
             left: 20px;
-            background-color: #FFFFFF;
-            border: 1px solid #CCC;
+            background-color: #fff;
+            border: 1px solid #fff;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1000;
@@ -70,24 +87,24 @@
             text-align: left;
             cursor: pointer;
             font-size: 1rem;
-            color: #4b0b14; /* Black */
+            color: #000; /* Black */
         }
 
         #filterDropdown button:hover {
-            background-color: #F5F5F5;
+            background-color: #fff;
         }
 
         /* Main content container */
         .main-content {
             padding: 30px 10%;
-            background-color: #808080; /* Grey */
+            background-color: #fff; /* Grey */
             min-height: 100vh; /* Ensure content takes full screen */
         }
 
         .title {
             text-align: center;
             font-size: 2rem;
-            color: #4b0b14; /* Black */
+            color: #000; /* Black */
             margin-bottom: 20px;
             font-family: 'Times New Roman', serif;
         }
@@ -101,10 +118,11 @@
         }
 
         .panel {
-            background-color: #808080; /* Grey */
-            border: 2px solid #808080;
+            background-color: #000; /* Grey */
+            border: 2px solid #000;
             border-radius: 10px;
             text-align: center;
+            text-decoration: none;
             transition: transform 0.3s ease;
             width: 300px; /* Increased width to match the grid */
             margin: 0 auto; /* Center each panel */
@@ -127,13 +145,13 @@
             margin-top: 2px;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #4b0b14; /* Black */
+            color: #bc021b; /* Black */
             font-family: 'Times New Roman', serif;
         }
 
         .panel .price {
             font-size: 1.2rem;
-            color: #4b0b14; /* Black */
+            color: #bc021b; /* Black */
             font-family: 'Times New Roman', serif;
         }
 
@@ -147,17 +165,25 @@
 </head>
 <body>
     <!-- REMS Logo -->
-    <div class="rems-logo">REMS</div>
+    <div class="rems-logo">Rouge.</div>
+
+    <!-- Hamburger Menu -->
+    <header class="home-bar">
+        <div></div>
+    </header>
 
     <!-- Top Image Section -->
     <div id="top-image">
-        <!-- Filter Icon -->
-        <div class="filter-icon" onclick="toggleDropdown()">☰</div>
-        <!-- Dropdown Menu -->
-        <div id="filterDropdown">
-            <button onclick="filterAlphabetically()">Filter Alphabetically</button>
-            <button onclick="filterPriceLowToHigh()">Filter Price: Low to High</button>
-            <button onclick="filterPriceHighToLow()">Filter Price: High to Low</button>
+        <img src="https://i.pinimg.com/originals/0f/9f/b4/0f9fb43b1bccabf93b4124491033c49c.gif" alt="Top Image GIF" class="gif-background">
+
+    <!-- Filter Icon -->
+    <div class="filter-icon" onclick="toggleDropdown()">☰</div>
+
+    <!-- Dropdown Menu -->
+    <div id="filterDropdown">
+        <button onclick="filterAlphabetically()">Filter Alphabetically</button>
+        <button onclick="filterPriceLowToHigh()">Filter Price: Low to High</button>
+        <button onclick="filterPriceHighToLow()">Filter Price: High to Low</button>
         </div>
     </div>
 

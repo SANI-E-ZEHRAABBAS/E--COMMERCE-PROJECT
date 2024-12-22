@@ -11,33 +11,115 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+       
+        .home-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Adjust height as needed */
+            background-color: #000; /* Light grey color */
+            z-index: 999; /* Keeps the bar below the logo and hamburger */
+        }
+
+
         /* REMS Logo (Fixed) */
         .rems-logo {
             position: fixed;
-            top: 20px;
+            top: 8px;
             right: 20px;
             font-family: 'Old English Text MT';
-            font-size: 36px;
-            color: #4b0b14; /* Fill color for the text */
+            font-size: 40px;
+            color:#bc021b; /* Maroon fill color */
             font-weight: bold;
-            z-index: 1000;
+            z-index: 1000; /* Ensures logo stays above the bar */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1100; /* Ensures the menu stays above the bar */
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #bc021b; /* Maroon lines */
+            margin: 5px 0;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Off-screen */
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto; /* Enable scrolling inside the panel if needed */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            z-index: 1100;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman';
+            color: #fff;
+            height: 20px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #bc021b;
+        }
+
+        .side-panel-content {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .side-panel-content li {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        /* Remove blue color and underline from links */
+        .side-panel-content li a {
+            text-decoration: none; /* Remove underline */
+            color: #000; /* Set text color to black */
+        }
+
+        /* Ensure no underline and add hover effect if desired */
+        .side-panel-content li a:hover {
+            text-decoration: none; /* Ensure no underline on hover */
+            color: #444; /* Optional: Change color on hover */
         }
 
         body {
             font-family: "Times New Roman", serif;
-            background-color: #808080; /* Background Color */
+            background-color: #fff; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
-
+        
         /* Container Styles */
         .container {
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
-            border: 3px solid #000;
+            background-color: #fff; /* Updated Darker Grey Panel Color */
+            border: 3px solid #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -51,7 +133,7 @@
             height: auto;
             border-radius: 8px;
             overflow: hidden;
-            background-color: #f5f5f5;
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -100,11 +182,11 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: #adaaaa; /* Lighter Grey */
+            background-color: #fff; /* Lighter Grey */
         }
 
         .options div:hover, .options div.selected {
-            background-color: #4b0b14; /* Maroon for Selected Option */
+            background-color: #000; /* Maroon for Selected Option */
             color: #FFF;
         }
 
@@ -153,7 +235,7 @@
             text-align: center;
             color: #666;
             cursor: pointer;
-            background-color: #adaaaa; /* Lighter Grey */
+            background-color: #fff; /* Lighter Grey */
             transition: background-color 0.3s ease;
         }
 
@@ -190,16 +272,16 @@
         }
 
         .buttons button:first-child:hover {
-            background-color: #333;
+            background-color: #bc021b;
         }
 
         .buttons button:last-child { /* Buy Now Button */
-            background-color: #4b0b14; /* Maroon */
+            background-color: #bc021b; /* Maroon */
             color: #FFF;
         }
 
         .buttons button:last-child:hover {
-            background-color: #4b0b14;
+            background-color: #bc021b;
         }
 
         /* Size Chart Modal */
@@ -245,53 +327,43 @@
         #price {
             font-weight: bold; /* Bold the Price */
         }
-        #cart-panel 
-        { position: fixed; 
-            top: 0; right: -350px;
-             width: 300px; 
-             height: 100%; 
-             background-color: #fff; 
-             box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.2); padding: 20px;
-              transition: right 0.3s ease-in-out; 
-              overflow-y: auto; }
-
-
-        #cart-panel.open 
-        { right: 0; }
-
-        #cart-panel .close-btn
-         { position: absolute; top:
-             10px; right: 10px; 
-             font-size: 1.5rem;
-              cursor: pointer; }
-
-        #cart-panel button 
-        { margin-top: 10px; 
-            padding: 10px;
-             border: none;
-              border-radius: 6px;
-               cursor: pointer; }
-
-        #checkout-form
-         { display: none;
-             margin-top: 20px; }
-
-        #checkout-form input, #checkout-form select
-         { width: 100%; 
-            padding: 10px; 
-            margin-bottom: 10px;
-             border: 1px solid #000; 
-             border-radius: 6px; }
-
-
-        #checkout-form button 
-        { background-color: #4b0b14; 
-            color: #fff; }
     </style>
 </head>
 <body>
     <!-- REMS Logo -->
-    <div class="rems-logo">REMS</div>
+    <div class="rems-logo">Rouge.</div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="openPanel()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <header class="home-bar">
+        <div></div>
+
+        </div>
+    </header>
+    <header class="home-bar">
+        <div class="hamburger" onclick="openPanel()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+     
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <span>MENU</span>
+            <div class="close-btn" onclick="closePanel()">&times;</div>
+        </div>
+        <ul class="side-panel-content">
+            <li><a href="hoodies.html">HOODIES</a></li>
+            <li><a href="shirts.html">SHIRTS</a></li>
+            <li><a href="pants2.html">PANTS</a></li>
+            <li><a href="headwear.html">HEADWEAR</a></li>
+        </ul>
+    </div>
 
     <div class="container">
         <!-- Shirt Display Panel -->
@@ -301,7 +373,7 @@
 
         <!-- Content Section -->
         <div class="content">
-            <h1 class="escorter" id="shirt-name">Oversized Shirt</h1>
+            <h1 class="escorter" id="shirt-name">Oversize Shirt</h1>
 
             <!-- Technique Selection -->
             <h3 class="small-heading">Technique</h3>
@@ -346,9 +418,11 @@
 
             <!-- Buttons -->
             <div class="buttons">
-                <button>Add to Cart</button>
-                <button>Buy Now</button>
+                <a href="addtocartO.html"><button>Add to Cart</button>
+                <button>Buy Now</button></a>
             </div>
+        </div>
+    </div>
 
     <!-- Size Chart Modal -->
     <div id="sizeChartModal" class="size-chart-modal">
@@ -356,16 +430,19 @@
             <span class="close-btn" onclick="closeSizeChart()">&times;</span>
             <iframe src="https://i.pinimg.com/736x/63/4c/b1/634cb11ccb0912a0501bd5b3638a9392.jpg"></iframe>
         </div>
-
-        <!-- Cart Panel -->
-    <div id="cart-panel">
-        <span class="close-btn" onclick="closeCart()">&times;</span>
     </div>
-    </div>
-
-    </body>
 
     <script>
+        // Open Side Panel
+        function openPanel() {
+            document.getElementById('sidePanel').style.left = '0';
+        }
+    
+        // Close Side Panel
+        function closePanel() {
+            document.getElementById('sidePanel').style.left = '-300px';
+        }
+
         function selectOption(element) {
             const siblings = element.parentElement.children;
             for (let sibling of siblings) {
@@ -387,87 +464,6 @@
 
         function closeSizeChart() {
             document.getElementById('sizeChartModal').style.display = 'none';
-        }
-        
-        let cart = [];
-
-        function selectOption(element) {
-            const siblings = element.parentElement.children;
-            for (let sibling of siblings) sibling.classList.remove('selected');
-            element.classList.add('selected');
-        }
-
-        function addToCart() {
-            const shirtName = document.getElementById('shirt-name').textContent;
-            const selectedSize = document.querySelector('.size-option.selected').textContent;
-            const selectedTechnique = document.querySelector('.technique-option.selected').textContent;
-            const price = parseFloat(document.getElementById('price').textContent.replace('$', ''));
-
-            const item = { name: shirtName, size: selectedSize, technique: selectedTechnique, price: price, quantity: 1 };
-            cart.push(item);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartPanel = document.getElementById('cart-panel');
-            cartPanel.innerHTML = `
-                <span class="close-btn" onclick="closeCart()">&times;</span>
-                <h3>Shopping Cart</h3>
-                ${cart.map((item, index) => `
-                    <div>
-                        <p>${item.name} (${item.size}, ${item.technique})</p>
-                        <p>Price: $${item.price.toFixed(2)}</p>
-                        <div>
-                            <button onclick="updateQuantity(${index}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateQuantity(${index}, 1)">+</button>
-                        </div>
-                        <p>Subtotal: $${(item.price * item.quantity).toFixed(2)}</p>
-                    </div>
-                `).join('')}
-                <p>Total: $${cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</p>
-                <button onclick="clearCart()">Clear Cart</button>
-                <button onclick="showCheckoutForm()">Checkout</button>
-                <form id="checkout-form">
-                    <h3>Checkout</h3>
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="text" placeholder="Address" required>
-                    <select required>
-                        <option value="" disabled selected>Select Payment Method</option>
-                        <option value="COD">Cash on Delivery</option>
-                        <option value="Card">Card</option>
-                    </select>
-                    <button type="submit" onclick="confirmOrder(event)">Confirm Order</button>
-                </form>
-            `;
-            cartPanel.classList.add('open');
-        }
-
-        function showCheckoutForm() {
-            document.getElementById('checkout-form').style.display = 'block';
-        }
-
-        function confirmOrder(event) {
-            event.preventDefault();
-            alert('Order confirmed! Thank you for shopping with us.');
-            clearCart();
-            closeCart();
-        }
-
-        function updateQuantity(index, change) {
-            cart[index].quantity += change;
-            if (cart[index].quantity <= 0) cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function closeCart() {
-            document.getElementById('cart-panel').classList.remove('open');
-        }
-
-        function clearCart() {
-            cart = [];
-            updateCartUI();
         }
     </script>
 

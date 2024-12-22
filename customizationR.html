@@ -11,22 +11,104 @@
             padding: 0;
             box-sizing: border-box;
         }
-         
+
+        .home-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Adjust height as needed */
+            background-color: #fff; /* Light grey color */
+            z-index: 999; /* Keeps the bar below the logo and hamburger */
+        }
+
+
         /* REMS Logo (Fixed) */
         .rems-logo {
             position: fixed;
-            top: 20px;
+            top: 8px;
             right: 20px;
             font-family: 'Old English Text MT';
-            font-size: 36px;
-            color: #4b0b14; /* Fill color for the text */
+            font-size: 40px;
+            color:#bc021b; /* Maroon fill color */
             font-weight: bold;
-            z-index: 1000;
+            z-index: 1000; /* Ensures logo stays above the bar */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1100; /* Ensures the menu stays above the bar */
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #bc021b; /* Maroon lines */
+            margin: 5px 0;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Off-screen */
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto; /* Enable scrolling inside the panel if needed */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            z-index: 1100;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman';
+            color: #fff;
+            height: 20px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #bc021b;
+        }
+
+        .side-panel-content {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .side-panel-content li {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        /* Remove blue color and underline from links */
+        .side-panel-content li a {
+            text-decoration: none; /* Remove underline */
+            color: #000; /* Set text color to black */
+        }
+
+        /* Ensure no underline and add hover effect if desired */
+        .side-panel-content li a:hover {
+            text-decoration: none; /* Ensure no underline on hover */
+            color: #444; /* Optional: Change color on hover */
         }
         
         body {
             font-family: "Times New Roman", serif;
-            background-color: #808080; /* Background Color */
+            background-color: #000; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
@@ -36,8 +118,8 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
-            border: 3px solid #000;
+            background-color: #fff; /* Updated Darker Grey Panel Color */
+            border: 3px solid #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -51,7 +133,7 @@
             height: auto;
             border-radius: 8px;
             overflow: hidden;
-            background-color: #f5f5f5;
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -100,11 +182,11 @@
             text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: #a9a9a9; /* Lighter Grey */
+            background-color: #fff; /* Lighter Grey */
         }
 
         .options div:hover, .options div.selected {
-            background-color: #4b0b14; /* Maroon for Selected Option */
+            background-color: #000; /* Maroon for Selected Option */
             color: #FFF;
         }
 
@@ -153,7 +235,7 @@
             text-align: center;
             color: #666;
             cursor: pointer;
-            background-color: #a9a9a9; /* Lighter Grey */
+            background-color: #fff; /* Lighter Grey */
             transition: background-color 0.3s ease;
         }
 
@@ -190,16 +272,16 @@
         }
 
         .buttons button:first-child:hover {
-            background-color: #333;
+            background-color: #bc021b;
         }
 
         .buttons button:last-child { /* Buy Now Button */
-            background-color: #4b0b14; /* Maroon */
+            background-color: #bc021b; /* Maroon */
             color: #FFF;
         }
 
         .buttons button:last-child:hover {
-            background-color: #4b0b14;
+            background-color: #bc021b;
         }
 
         /* Size Chart Modal */
@@ -249,76 +331,119 @@
 </head>
 <body>
     <!-- REMS Logo -->
-    <div class="rems-logo">REMS</div>
+    <div class="rems-logo">Rouge.</div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="openPanel()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <header class="home-bar">
+        <div></div>
+
+        </div>
+    </header>
+    <header class="home-bar">
+        <div class="hamburger" onclick="openPanel()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+     
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <span>MENU</span>
+            <div class="close-btn" onclick="closePanel()">&times;</div>
+        </div>
+        <ul class="side-panel-content">
+            <li><a href="hoodies.html">HOODIES</a></li>
+            <li><a href="shirts.html">SHIRTS</a></li>
+            <li><a href="pants2.html">PANTS</a></li>
+            <li><a href="headwear.html">HEADWEAR</a></li>
+        </ul>
+    </div>
 
     <div class="container">
-        <!-- Shirt Display Panel -->
-        <div class="shirt-panel">
-            <img src="https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg" id="shirt-image" alt="Product Preview">
+
+    <!-- Shirt Display Panel -->
+    <div class="shirt-panel">
+        <img src="https://i.pinimg.com/736x/69/15/c6/6915c693435e97652ddc7d990439e080.jpg" id="shirt-image" alt="Product Preview">
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h1 class="escorter" id="shirt-name">Regular Fit</h1>
+
+    <!-- Technique Selection -->
+    <h3 class="small-heading">Technique</h3>
+        <div class="options">
+            <div class="technique-option selected" onclick="selectOption(this)">Digital Print</div>
+            <div class="technique-option" onclick="selectOption(this)">Embroidery</div>
         </div>
 
-        <!-- Content Section -->
-        <div class="content">
-            <h1 class="escorter" id="shirt-name">Regular Fit</h1>
-
-            <!-- Technique Selection -->
-            <h3 class="small-heading">Technique</h3>
-            <div class="options">
-                <div class="technique-option selected" onclick="selectOption(this)">Digital Print</div>
-                <div class="technique-option" onclick="selectOption(this)">Embroidery</div>
-            </div>
-
-            <!-- Color Selection -->
-            <h3 class="small-heading">Colors</h3>
-            <div class="color-options" id="color-options">
-                <div class="color-box" style="background-color: #011325;" onclick="selectColor('#011325')"></div>
-                <div class="color-box" style="background-color: #002001;" onclick="selectColor('#002001')"></div>
-                <div class="color-box" style="background-color: #000000;" onclick="selectColor('#000000')"></div>
-                <div class="color-box" style="background-color: #36030a;" onclick="selectColor('#36030a')"></div>
-                <div class="color-box" style="background-color: #5a5959;" onclick="selectColor('#5a5959')"></div>
-                <div class="color-box" style="background-color: #FFFFFF;" onclick="selectColor('#FFFFFF')"></div>
-                <div class="color-box" style="background-color: #a78165;" onclick="selectColor('#a78165')"></div>
-            </div>
-
-            <!-- Size Selection -->
-            <h3 class="small-heading">Size <span style="float: right;"><a href="#" onclick="openSizeChart()" style="text-decoration: none; color: #000;">Size Chart</a></span></h3>
-            <div class="options">
-                <div class="size-option selected" onclick="selectOption(this)">XS</div>
-                <div class="size-option" onclick="selectOption(this)">S</div>
-                <div class="size-option" onclick="selectOption(this)">M</div>
-                <div class="size-option" onclick="selectOption(this)">L</div>
-                <div class="size-option" onclick="selectOption(this)">XL</div>
-            </div>
-
-            <!-- Price Display -->
-            <h3 class="small-heading">Price</h3>
-            <p id="price">$19.99</p>
-
-            <!-- File Upload -->
-            <h3 class="small-heading">Create Your Own Style</h3>
-            <div class="file-upload">
-                <label for="file-input" id="file-label">Attach your design file here</label>
-                <input type="file" id="file-input" accept=".png, .pdf, .jpeg">
-                <span>Formats allowed: PNG, PDF, JPEG</span>
-            </div>
-
-            <!-- Buttons -->
-            <div class="buttons">
-                <button>Add to Cart</button>
-                <button>Buy Now</button>
-            </div>
+    <!-- Color Selection -->
+    <h3 class="small-heading">Colors</h3>
+        <div class="color-options" id="color-options">
+            <div class="color-box" style="background-color: #011325;" onclick="selectColor('#011325')"></div>
+            <div class="color-box" style="background-color: #002001;" onclick="selectColor('#002001')"></div>
+            <div class="color-box" style="background-color: #000000;" onclick="selectColor('#000000')"></div>
+            <div class="color-box" style="background-color: #36030a;" onclick="selectColor('#36030a')"></div>
+            <div class="color-box" style="background-color: #5a5959;" onclick="selectColor('#5a5959')"></div>
+            <div class="color-box" style="background-color: #FFFFFF;" onclick="selectColor('#FFFFFF')"></div>
+            <div class="color-box" style="background-color: #a78165;" onclick="selectColor('#a78165')"></div>
         </div>
+
+    <!-- Size Selection -->
+    <h3 class="small-heading">Size <span style="float: right;"><a href="#" onclick="openSizeChart()" style="text-decoration: none; color: #000;">Size Chart</a></span></h3>
+        <div class="options">
+            <div class="size-option selected" onclick="selectOption(this)">XS</div>
+            <div class="size-option" onclick="selectOption(this)">S</div>
+            <div class="size-option" onclick="selectOption(this)">M</div>
+            <div class="size-option" onclick="selectOption(this)">L</div>
+            <div class="size-option" onclick="selectOption(this)">XL</div>
+        </div>
+
+    <!-- Price Display -->
+    <h3 class="small-heading">Price</h3>
+        <p id="price">$19.99</p>
+
+    <!-- File Upload -->
+    <h3 class="small-heading">Create Your Own Style</h3>
+    <div class="file-upload">
+        <label for="file-input" id="file-label">Attach your design file here</label>
+        <input type="file" id="file-input" accept=".png, .pdf, .jpeg">
+        <span>Formats allowed: PNG, PDF, JPEG</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+        <a href="addtocartR.html"><button>Add to Cart</button>
+        <button>Buy Now</button></a>
+        </div>
+    </div>
     </div>
 
     <!-- Size Chart Modal -->
     <div id="sizeChartModal" class="size-chart-modal">
         <div class="size-chart-content">
             <span class="close-btn" onclick="closeSizeChart()">&times;</span>
-            <iframe src="https://i.pinimg.com/736x/f8/dd/6b/f8dd6bd93d0fdd92e60d0235f0ba08e1.jpg"></iframe>
+            <iframe src="https://i.pinimg.com/736x/63/4c/b1/634cb11ccb0912a0501bd5b3638a9392.jpg"></iframe>
         </div>
     </div>
 
     <script>
+        // Open Side Panel
+        function openPanel() {
+            document.getElementById('sidePanel').style.left = '0';
+        }
+    
+        // Close Side Panel
+        function closePanel() {
+            document.getElementById('sidePanel').style.left = '-300px';
+        }
+
         function selectOption(element) {
             const siblings = element.parentElement.children;
             for (let sibling of siblings) {
