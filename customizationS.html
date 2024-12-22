@@ -12,22 +12,102 @@
             box-sizing: border-box;
         }
         
+        .home-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px; /* Adjust height as needed */
+            background-color: #000; /* Light grey color */
+            z-index: 999; /* Keeps the bar below the logo and hamburger */
+        }
 
         /* REMS Logo (Fixed) */
         .rems-logo {
             position: fixed;
-            top: 20px;
+            top: 8px;
             right: 20px;
             font-family: 'Old English Text MT';
-            font-size: 36px;
-            color: #4b0b14; /* Fill color for the text */
+            font-size: 40px;
+            color:#bc021b; /* Maroon fill color */
             font-weight: bold;
-            z-index: 1000;
+            z-index: 1000; /* Ensures logo stays above the bar */
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1100; /* Ensures the menu stays above the bar */
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            background-color: #bc021b; /* Maroon lines */
+            margin: 5px 0;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Off-screen */
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto; /* Enable scrolling inside the panel if needed */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            z-index: 1100;
+        }
+
+        .side-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #000;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman';
+            color: #fff;
+            height: 20px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #bc021b;
+        }
+
+        .side-panel-content {
+            list-style-type: none;
+            padding: 20px;
+            margin: 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        .side-panel-content li {
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        /* Remove blue color and underline from links */
+        .side-panel-content li a {
+            text-decoration: none; /* Remove underline */
+            color: #000; /* Set text color to black */
+        }
+
+        /* Ensure no underline and add hover effect if desired */
+        .side-panel-content li a:hover {
+            text-decoration: none; /* Ensure no underline on hover */
+            color: #444; /* Optional: Change color on hover */
         }
 
         body {
             font-family: "Times New Roman", serif;
-            background-color: #808080; /* Background Color */
+            background-color: #000; /* Background Color */
             color: #000;
             overflow-x: hidden;
         }
@@ -37,8 +117,8 @@
             max-width: 1200px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #adaaaa; /* Updated Darker Grey Panel Color */
-            border: 3px solid #000;
+            background-color: #fff; /* Updated Darker Grey Panel Color */
+            border: 3px solid #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
@@ -52,7 +132,7 @@
             height: auto;
             border-radius: 8px;
             overflow: hidden;
-            background-color: #f5f5f5;
+            background-color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -105,7 +185,7 @@
         }
 
         .options div:hover, .options div.selected {
-            background-color: #4b0b14; /* Maroon for Selected Option */
+            background-color: #bc021b; /* Maroon for Selected Option */
             color: #FFF;
         }
 
@@ -186,21 +266,21 @@
         }
 
         .buttons button:first-child { /* Add to Cart Button */
-            background-color: #000; /* Black */
+            background-color: #bc021b; /* Black */
             color: #FFF;
         }
 
         .buttons button:first-child:hover {
-            background-color: #333;
+            background-color: #bc021b;
         }
 
         .buttons button:last-child { /* Buy Now Button */
-            background-color: #4b0b14; /* Maroon */
+            background-color: #bc021b; /* Maroon */
             color: #FFF;
         }
 
         .buttons button:last-child:hover {
-            background-color: #4b0b14;
+            background-color: #bc021b;
         }
 
         /* Size Chart Modal */
@@ -250,7 +330,39 @@
 </head>
 <body>
     <!-- REMS Logo -->
-    <div class="rems-logo">REMS</div>
+    <div class="rems-logo">Rouge.</div>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger" onclick="openPanel()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <header class="home-bar">
+        <div></div>
+
+        </div>
+    </header>
+    <header class="home-bar">
+        <div class="hamburger" onclick="openPanel()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+     
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <span>MENU</span>
+            <div class="close-btn" onclick="closePanel()">&times;</div>
+        </div>
+        <ul class="side-panel-content">
+            <li><a href="hoodies.html">HOODIES</a></li>
+            <li><a href="shirts.html">SHIRTS</a></li>
+            <li><a href="pants2.html">PANTS</a></li>
+            <li><a href="headwear.html">HEADWEAR</a></li>
+        </ul>
+    </div>
 
     <div class="container">
         <!-- Shirt Display Panel -->
@@ -305,8 +417,8 @@
 
             <!-- Buttons -->
             <div class="buttons">
-                <button>Add to Cart</button>
-                <button>Buy Now</button>
+                <a href="addtocartS.html"><button>Add to Cart</button>
+                <button>Buy Now</button></a>
             </div>
         </div>
     </div>
@@ -320,6 +432,16 @@
     </div>
 
     <script>
+        // Open Side Panel
+        function openPanel() {
+            document.getElementById('sidePanel').style.left = '0';
+        }
+    
+        // Close Side Panel
+        function closePanel() {
+            document.getElementById('sidePanel').style.left = '-300px';
+        }
+
         function selectOption(element) {
             const siblings = element.parentElement.children;
             for (let sibling of siblings) {
